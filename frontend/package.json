@@ -1,0 +1,21 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "Zooby Frontend",
+  "author": "",
+  "license": "MIT",
+  "homepage": "https://johnboyce.github.io/zooby",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0",
+    "vite": "^5.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@vitejs/plugin-react": "^4.0.0"
+  }
+}
