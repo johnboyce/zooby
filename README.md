@@ -1,110 +1,122 @@
-# Zooby
+# 🦓 Zooby
 
-[![Backend](https://github.com/johnboyce/zooby/actions/workflows/backend.yml/badge.svg)](https://github.com/johnboyce/zooby/actions/workflows/backend.yml)
-[![CI](https://github.com/johnboyce/zooby/actions/workflows/ci.yml/badge.svg)](https://github.com/johnboyce/zooby/actions/workflows/ci.yml)
-[![Frontend](https://github.com/johnboyce/zooby/actions/workflows/frontend.yml/badge.svg)](https://github.com/johnboyce/zooby/actions/workflows/frontend.yml)
-[![Deploy UI](https://github.com/johnboyce/zooby/actions/workflows/deploy-ui.yml/badge.svg)](https://github.com/johnboyce/zooby/actions/workflows/deploy-ui.yml)
-[![Infra](https://github.com/johnboyce/zooby/actions/workflows/infra.yml/badge.svg)](https://github.com/johnboyce/zooby/actions/workflows/infra.yml)
-[![Terraform](https://github.com/johnboyce/zooby/actions/workflows/terraform.yml/badge.svg)](https://github.com/johnboyce/zooby/actions/workflows/terraform.yml)
+**Zooby** is an event-driven AWS-native application that tracks activation events using a modern stack:
 
-An event-driven AWS application with a Quarkus GraphQL backend, LocalStack, Terraform infrastructure, and a React + Tailwind frontend.
+- **Backend:** Quarkus (GraphQL API) with native builds via GraalVM
+- **Frontend:** React + Vite + TailwindCSS
+- **Infra:** Terraform (with LocalStack for local dev)
+- **CI/CD:** GitHub Actions
+- **Deploy:** GitHub Pages + AWS (DynamoDB, Lambda, SQS, SNS)
+
+---
 
 ## 🚀 Live Demo
 
-👉 [Visit the App](https://johnboyce.github.io/zooby/)
-
-# 🦾 Zooby
-
-**Zooby** is a modern, event-driven device activation platform for tracking and managing network-connected devices using AWS-native services, GraphQL, and a sleek frontend UI. Development is LocalStack-powered and CI/CD-ready with full GitHub integration.
+🌐 [View the UI on GitHub Pages](https://johnboyce.github.io/zooby)
 
 ---
 
-## ✅ Project Overview
+## 📦 Architecture
 
-Zooby enables:
-- Device eligibility verification and activation
-- Real-time status tracking of activation steps
-- User-facing UI to track device status
-- Event-driven backend with GraphQL + DynamoDB
-- AWS Lambda integration (coming soon)
-
----
-
-## 📋 Project Checklist
-
-### ✅ Completed
-
-- [x] GraphQL API with Quarkus
-- [x] GraphQL endpoints: `eligibility`, `activate`, `activationStatus`
-- [x] DynamoDB integration (LocalStack)
-- [x] React + Vite + TailwindCSS frontend
-- [x] Frontend deployed via GitHub Pages
-- [x] GitHub Actions CI for backend, frontend, and Terraform
-- [x] LocalStack setup (Docker Compose)
-- [x] Terraform infra with validation CI
-- [x] Project branding and assets
-- [x] Makefile for unified dev workflow
-
-### 🛠️ In Progress
-
-- [ ] Frontend connection to GraphQL
-- [ ] JWT authentication in frontend/backend
-- [ ] Local end-to-end simulation (device → activation → SQS)
-- [ ] AWS Lambda scaffolding
-- [ ] Terraform-managed AWS deployment (beyond LocalStack)
-
-### 🧭 To Do Next
-
-- [ ] Implement Lambda for device online → trigger activation
-- [ ] Implement Lambda for processing SQS → update status
-- [ ] Add authentication via JWT
-- [ ] Add WebSocket or polling for real-time frontend updates
-- [ ] Polish Terraform modules for full AWS deploy
+```
+React UI (GitHub Pages)
+         ↓
+GraphQL API (Quarkus on Fargate or native local)
+         ↓
+SQS/SNS → Lambda → DynamoDB
+```
 
 ---
 
 ## 🧰 Tech Stack
 
-| Layer        | Technology                         |
-|--------------|-------------------------------------|
-| Backend      | Quarkus, GraphQL, Java 17          |
-| Frontend     | React, Vite, TailwindCSS           |
-| Auth         | JWT (planned)                      |
-| Infrastructure | Terraform                        |
-| AWS Services | DynamoDB, SQS, Lambda, LocalStack  |
-| CI/CD        | GitHub Actions                     |
+| Layer        | Tech                            |
+|--------------|----------------------------------|
+| Frontend     | React, Vite, TailwindCSS         |
+| Backend      | Quarkus (GraphQL, JWT, MDC, native) |
+| Database     | AWS DynamoDB                     |
+| Messaging    | AWS SNS + SQS                    |
+| Dev Infra    | LocalStack, Docker               |
+| Infra-as-Code| Terraform                        |
+| CI/CD        | GitHub Actions                   |
 
 ---
 
-## 🧪 Local Development
+## 🛠️ Local Development
 
-1. Start LocalStack & DynamoDB Admin:
-    ```bash
-    make up
-    ```
+### Prerequisites
 
-2. Initialize AWS resources:
-    ```bash
-    ./init-localstack.sh
-    ```
+- Java 21 (GraalVM)
+- Node.js ≥18
+- Docker (for LocalStack)
+- Terraform ≥1.5
+- `make`, `git`, `jq`, `curl`
 
-3. Build and run backend:
-    ```bash
-    make build
-    ```
+### Setup
 
-4. Develop UI:
-    ```bash
-    cd frontend && npm run dev
-    ```
+```bash
+git clone https://github.com/johnboyce/zooby.git
+cd zooby
+make setup  # optional: setup scripts, install deps, etc.
+```
 
----
+### Start Dev Environment
 
-## 🔗 Links
-
-- Frontend UI: [GitHub Pages Deployment](https://your-username.github.io/zooby)
-- GitHub Repo: [https://github.com/your-username/zooby](https://github.com/your-username/zooby)
+```bash
+make dev              # Starts Quarkus in dev mode
+make frontend-dev     # Runs React frontend with Vite
+make localstack-up    # Spins up LocalStack
+make infra-apply      # Applies Terraform locally
+```
 
 ---
 
-> Made with ☕, ☁️, and a little bit of 🔌 by you.
+## 🧪 Testing
+
+```bash
+make test
+```
+
+---
+
+## 🚢 Deployment
+
+```bash
+make native          # Builds native image
+make native-run      # Runs native binary
+make deploy-ui       # Deploys frontend to GitHub Pages
+make infra-deploy    # Applies infra to AWS
+```
+
+---
+
+## 📂 Project Structure
+
+```
+zooby/
+├── backend/           # Quarkus GraphQL backend
+├── frontend/          # React frontend (Vite)
+├── infra/             # Terraform definitions
+├── .github/workflows/ # CI/CD workflows
+└── Makefile           # Automation scripts
+```
+
+---
+
+## 📸 Screenshots
+
+_Add screenshots of the UI and logs here (optional)_
+
+---
+
+## ✅ GitHub Actions
+
+![Backend CI](https://github.com/johnboyce/zooby/actions/workflows/backend.yml/badge.svg)
+![Frontend CI](https://github.com/johnboyce/zooby/actions/workflows/frontend.yml/badge.svg)
+![Deploy UI](https://github.com/johnboyce/zooby/actions/workflows/deploy-ui.yml/badge.svg)
+
+---
+
+## 📃 License
+
+MIT © [johnboyce](https://github.com/johnboyce)
