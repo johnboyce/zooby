@@ -1,0 +1,66 @@
+# --- Java & Maven ---
+target/
+*.log
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+hs_err_pid*.log
+.mvn/
+!**/mvnw*
+dependency-reduced-pom.xml
+
+# IntelliJ / Eclipse
+.idea/
+*.iml
+*.iws
+*.ipr
+*.classpath
+*.project
+.settings/
+out/
+
+# --- Node / Vite / React ---
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.eslintcache
+
+# Logs and environment
+.env
+.env.*
+*.local
+
+# --- Terraform ---
+*.tfstate
+*.tfstate.backup
+.terraform/
+terraform.tfstate.d/
+crash.log
+
+# --- LocalStack and docker artifacts ---
+localstack/
+__pycache__/
+*.pyc
+
+# --- OS / Editor Artifacts ---
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# --- VSCode ---
+.vscode/
+
+# --- Build Scripts ---
+*.sh~
+*.bak
+
+# --- Logs ---
+logs/
+*.log
+
+# --- GitHub Actions Cache ---
+/.github/workflows/*.log
+
