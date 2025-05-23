@@ -48,4 +48,5 @@ jobs:
           cd infra
           terraform init -backend=false
           terraform validate
-
+        env:
+          AWS_S3_FORCE_PATH_STYLE: true
