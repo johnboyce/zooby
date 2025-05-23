@@ -1,0 +1,32 @@
+name: Terraform CI
+
+on:
+  push:
+    paths:
+      - 'infra/**'
+      - '.github/workflows/terraform.yml'
+  pull_request:
+    paths:
+      - 'infra/**'
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    name: Format and Validate Terraform
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+      - name: Init
+        run: cd infra && terraform init -backend=false
+
+      - name: Format Check
+        run: cd infra && terraform fmt -check
+
+      - name: Validate
+        run: cd infra && terraform validate
