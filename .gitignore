@@ -72,3 +72,9 @@ logs/
 # --- GitHub Actions Cache ---
 /.github/workflows/*.log
 
+# Ignore any local secret directories
+/secrets/
+/keys/
+privateKey.pem
+*.key
+*.crt
