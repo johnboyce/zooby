@@ -1,7 +1,11 @@
 # Zooby
 
-[![Build](https://github.com/johnboyce/zooby/actions/workflows/build.yml/badge.svg)](https://github.com/johnboyce/zooby/actions/workflows/build.yml)
-[![Deploy to GitHub Pages](https://github.com/johnboyce/zooby/actions/workflows/deploy.yml/badge.svg)](https://github.com/johnboyce/zooby/actions/workflows/deploy.yml)
+[![Backend](https://github.com/johnboyce/zooby/actions/workflows/backend.yml/badge.svg)](https://github.com/johnboyce/zooby/actions/workflows/backend.yml)
+[![CI](https://github.com/johnboyce/zooby/actions/workflows/ci.yml/badge.svg)](https://github.com/johnboyce/zooby/actions/workflows/ci.yml)
+[![Frontend](https://github.com/johnboyce/zooby/actions/workflows/frontend.yml/badge.svg)](https://github.com/johnboyce/zooby/actions/workflows/frontend.yml)
+[![Deploy UI](https://github.com/johnboyce/zooby/actions/workflows/deploy-ui.yml/badge.svg)](https://github.com/johnboyce/zooby/actions/workflows/deploy-ui.yml)
+[![Infra](https://github.com/johnboyce/zooby/actions/workflows/infra.yml/badge.svg)](https://github.com/johnboyce/zooby/actions/workflows/infra.yml)
+[![Terraform](https://github.com/johnboyce/zooby/actions/workflows/terraform.yml/badge.svg)](https://github.com/johnboyce/zooby/actions/workflows/terraform.yml)
 
 An event-driven AWS application with a Quarkus GraphQL backend, LocalStack, Terraform infrastructure, and a React + Tailwind frontend.
 
