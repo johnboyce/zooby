@@ -1,6 +1,7 @@
 package com.zooby.graphql;
 
 import com.zooby.dynamodb.DynamoDBService;
+import org.jboss.logging.Logger;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 
 import jakarta.inject.Inject;
@@ -13,23 +14,42 @@ import java.util.Map;
 @GraphQLApi
 public class ActivationResolver {
 
+    private static final Logger LOG = Logger.getLogger(ActivationResolver.class);
+
+
     @Inject
     DynamoDBService dynamoService;
 
     @Query
     public ActivationStatus activationStatus(@Name("transactionId") String transactionId) {
-        Map<String, AttributeValue> item = dynamoService.getActivationStatus(transactionId);
-        if (item == null) return null;
+        LOG.infof("Fetching activation status for transactionId=%s", transactionId);
 
-        return new ActivationStatus(
-                item.get("macAddress").s(),
-                item.get("transactionId").s(),
-                item.get("userId").s(),
-                item.get("status").s(),
-                item.containsKey("stepsLog") ? item.get("stepsLog").ss() : List.of(),
-                item.get("updatedAt").s()
-        );
+        try {
+            Map<String, AttributeValue> item = dynamoService.getActivationStatus(transactionId);
+
+            if (item == null) {
+                LOG.warnf("No activation status found for transactionId=%s", transactionId);
+                return null;
+            }
+
+            ActivationStatus status = new ActivationStatus(
+                    item.get("macAddress").s(),
+                    item.get("transactionId").s(),
+                    item.get("userId").s(),
+                    item.get("status").s(),
+                    item.containsKey("stepsLog") ? item.get("stepsLog").ss() : List.of(),
+                    item.get("updatedAt").s()
+            );
+
+            LOG.debugf("Resolved activation status: %s", status);
+            return status;
+
+        } catch (Exception e) {
+            LOG.errorf("Error fetching activation status for transactionId=%s: %s", transactionId, e.getMessage());
+            throw new RuntimeException("Failed to fetch activation status", e);
+        }
     }
+
 
     @Query
     public EligibilityResult eligibility(@Name("macAddress") String macAddress) {

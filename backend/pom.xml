@@ -8,20 +8,27 @@
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>zooby-backend</name>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <quarkus.version>3.7.3</quarkus.version>
-        <java.version>17</java.version>
+        <quarkus.platform.version>3.8.1</quarkus.platform.version>
+        <quarkus-plugin.version>3.8.1</quarkus-plugin.version>
+        <java.version>21</java.version>
     </properties>
+    <profiles>
+        <profile>
+            <id>native</id>
+            <properties>
+                <quarkus.package.type>native</quarkus.package.type>
+            </properties>
+        </profile>
+    </profiles>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>io.quarkus</groupId>
+                <groupId>io.quarkus.platform</groupId>
                 <artifactId>quarkus-bom</artifactId>
-                <version>${quarkus.version}</version>
+                <version>${quarkus.platform.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -42,9 +49,14 @@
             <artifactId>quarkus-smallrye-jwt</artifactId>
         </dependency>
         <dependency>
+            <groupId>io.quarkiverse.amazonservices</groupId>
+            <artifactId>quarkus-amazon-dynamodb</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+        <dependency>
             <groupId>software.amazon.awssdk</groupId>
-            <artifactId>dynamodb</artifactId>
-            <version>2.20.150</version> <!-- AWS SDK version explicitly defined -->
+            <artifactId>url-connection-client</artifactId>
+            <version>2.25.4</version> <!-- ✅ Match your other AWS SDK modules -->
         </dependency>
     </dependencies>
 
@@ -53,7 +65,7 @@
             <plugin>
                 <groupId>io.quarkus</groupId>
                 <artifactId>quarkus-maven-plugin</artifactId>
-                <version>${quarkus.version}</version>
+                <version>${quarkus-plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -63,8 +75,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <!-- ✅ Fix for Java records -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -75,5 +85,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

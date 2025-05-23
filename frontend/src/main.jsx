@@ -1,16 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import ActivationStatus from './components/ActivationStatus';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import ActivationStatus from './components/ActivationStatus'
 
-const App = () => {
-    // Replace this with a real transactionId
-    const testTransactionId = "txn-AABBCCDDEE00-1716515612";
+const App = () => (
+  <div style={{ padding: 40, fontFamily: 'sans-serif' }}>
+    <h1>🔧 Zooby Activation Status</h1>
+    <ActivationStatus transactionId="txn-AABBCCDDEE00-1716515612" />
+  </div>
+)
 
-    return (
-        <div className="min-h-screen p-8 bg-gray-100">
-            <ActivationStatus transactionId={testTransactionId} />
-        </div>
-    );
-};
-
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)

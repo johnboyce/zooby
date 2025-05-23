@@ -15,6 +15,15 @@ lint:
 test:
 	cd backend && ./mvnw test
 
+dev:
+	cd backend && ./mvnw quarkus:dev
+
+native:
+	cd backend && ./mvnw clean package -Pnative
+
+native-run:
+	cd backend && ./target/zooby-backend-1.0.0-runner
+
 deploy-ui:
 	cd frontend && npm run deploy
 
