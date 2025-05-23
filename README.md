@@ -1,5 +1,14 @@
 # Zooby
 
+[![Build](https://github.com/johnboyce/zooby/actions/workflows/build.yml/badge.svg)](https://github.com/johnboyce/zooby/actions/workflows/build.yml)
+[![Deploy to GitHub Pages](https://github.com/johnboyce/zooby/actions/workflows/deploy.yml/badge.svg)](https://github.com/johnboyce/zooby/actions/workflows/deploy.yml)
+
+An event-driven AWS application with a Quarkus GraphQL backend, LocalStack, Terraform infrastructure, and a React + Tailwind frontend.
+
+## 🚀 Live Demo
+
+👉 [Visit the App](https://johnboyce.github.io/zooby/)
+
 # 🦾 Zooby
 
 **Zooby** is a modern, event-driven device activation platform for tracking and managing network-connected devices using AWS-native services, GraphQL, and a sleek frontend UI. Development is LocalStack-powered and CI/CD-ready with full GitHub integration.
