@@ -40,6 +40,9 @@ jobs:
           cd frontend
           npm run lint || echo "Linting issues detected"
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
       - name: Validate Terraform
         run: |
           cd infra
