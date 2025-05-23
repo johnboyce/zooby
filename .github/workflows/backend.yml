@@ -23,6 +23,9 @@ jobs:
           distribution: 'graalvm'
           java-version: '21'
 
+      - name: Confirm Java version
+        run: java -version
+
       - name: Make executable
         run: chmod +x backend/mvnw
 
