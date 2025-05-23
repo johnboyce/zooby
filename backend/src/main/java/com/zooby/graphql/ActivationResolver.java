@@ -51,7 +51,7 @@ public class ActivationResolver {
                 "updatedAt", AttributeValue.fromS(Instant.now().toString()),
                 "make", AttributeValue.fromS(make),
                 "model", AttributeValue.fromS(model),
-                "stepsLog", AttributeValue.fromSs("Activation started")
+                "stepsLog", AttributeValue.fromSs(List.of("Activation started"))
         ));
 
         return new ActivationResponse(transactionId, true);
