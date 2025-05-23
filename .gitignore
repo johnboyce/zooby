@@ -7,8 +7,16 @@ target/
 *.nar
 *.ear
 hs_err_pid*.log
-.mvn/
-!**/mvnw*
+
+# Ignore all Maven settings EXCEPT the wrapper
+.mvn/*
+!.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.properties
+
+# Always include the wrapper scripts
+!mvnw
+!mvnw.cmd
+
 dependency-reduced-pom.xml
 
 # IntelliJ / Eclipse
