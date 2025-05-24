@@ -54,7 +54,7 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-jwt</artifactId>
+      <artifactId>quarkus-oidc</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkiverse.amazonservices</groupId>
@@ -112,6 +112,11 @@
         <configuration>
           <release>${java.version}</release>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.1.0</version>
       </plugin>
     </plugins>
   </build>

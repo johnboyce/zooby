@@ -1,6 +1,10 @@
 package com.zooby.graphql;
 
 import com.zooby.dynamodb.DynamoDBService;
+import com.zooby.model.ActivationResponse;
+import com.zooby.model.ActivationStatus;
+import com.zooby.model.EligibilityResult;
+import jakarta.annotation.security.RolesAllowed;
 import org.jboss.logging.Logger;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 
@@ -16,11 +20,11 @@ public class ActivationResolver {
 
     private static final Logger LOG = Logger.getLogger(ActivationResolver.class);
 
-
     @Inject
     DynamoDBService dynamoService;
 
     @Query
+    @RolesAllowed("Customer")
     public ActivationStatus activationStatus(@Name("transactionId") String transactionId) {
         LOG.infof("Fetching activation status for transactionId=%s", transactionId);
 
@@ -52,12 +56,14 @@ public class ActivationResolver {
 
 
     @Query
+    @RolesAllowed("Manager")
     public EligibilityResult eligibility(@Name("macAddress") String macAddress) {
         // Simulated logic; could be replaced with actual lookup
         return new EligibilityResult(macAddress, true, "ZoobyCorp", "ModelZ-9000");
     }
 
     @Mutation
+    @RolesAllowed("Manager")
     public ActivationResponse activate(@Name("macAddress") String macAddress,
                                        @Name("make") String make,
                                        @Name("model") String model) {

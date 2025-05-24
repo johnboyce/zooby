@@ -1,4 +1,4 @@
-package com.zooby.graphql;
+package com.zooby.model;
 
 public record EligibilityResult(
     String macAddress,

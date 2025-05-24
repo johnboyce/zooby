@@ -1,4 +1,4 @@
-package com.zooby.graphql;
+package com.zooby.model;
 
 import java.util.List;
 

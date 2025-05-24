@@ -1,4 +1,4 @@
-package com.zooby.graphql;
+package com.zooby.model;
 
 public record ActivationResponse(
     String transactionId,

@@ -1,6 +1,7 @@
 package com.zooby.graphql;
 
 import com.zooby.dynamodb.DynamoDBService;
+import com.zooby.model.ActivationStatus;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.junit.mockito.InjectMock;
 import org.junit.jupiter.api.Test;

@@ -1,8 +1,10 @@
-package com.zooby.graphql;
+package com.zooby.service;
 
+import com.zooby.model.ActivationResponse;
+import com.zooby.model.ActivationStatus;
+import com.zooby.model.EligibilityResult;
 import jakarta.enterprise.context.ApplicationScoped;
 import java.util.Arrays;
-import java.util.List;
 
 @ApplicationScoped
 public class ActivationService {
