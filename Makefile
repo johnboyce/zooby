@@ -29,3 +29,15 @@ deploy-ui:
 
 terraform:
 	cd infra && terraform init && terraform apply -auto-approve
+
+# JWT Usage:
+# make jwt ARGS="admin-001 admin restart"
+# make jwt ARGS="manager-002 manager view-status"
+# make jwt ARGS="customer-123"
+
+jwt:
+	@cd backend && ./mvnw -q compile exec:java \
+		-Dsmallrye.jwt.sign.key.location=src/main/resources/keys/privateKey.pem \
+		-Dexec.mainClass="com.zooby.security.TokenCli" \
+		-Dexec.args="$(ARGS)" | grep -v "\[INFO\]" | grep -v "\[WARNING\]"
+
