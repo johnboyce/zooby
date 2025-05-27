@@ -4,8 +4,12 @@ export default function ActivationStatus() {
   const [status, setStatus] = useState("INPROGRESS");
   const [steps, setSteps] = useState([
     "Initializing",
-    "Contacting Zoomba",
-    "Bootfile Ready"
+    "Checking Model",
+    "Checking Firmware",
+    "Contacting Zoom" +
+    "Registering Zooby",
+    "Bootfile Ready",
+    "Zoombified"
   ]);
 
   useEffect(() => {
