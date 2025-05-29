@@ -30,3 +30,8 @@ jobs:
 
       - name: Validate
         run: cd infra && terraform validate
+
+      - name: Plan (Local)
+        run: cd infra && terraform plan -var-file=environments/local.tfvars
+        env:
+          AWS_S3_FORCE_PATH_STYLE: true
