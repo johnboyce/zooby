@@ -14,6 +14,11 @@ check: ## Run build, lint, tests, and terraform plan
 	$(MAKE) test
 	$(MAKE) tf-plan
 
+check-core:
+	$(MAKE) build
+	$(MAKE) lint
+	$(MAKE) test
+
 # ======================
 # Docker & Backend Targets
 # ======================

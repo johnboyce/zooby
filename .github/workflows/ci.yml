@@ -28,24 +28,18 @@ jobs:
           distribution: 'graalvm-community'
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Make backend wrapper executable
-        run: chmod +x backend/mvnw
-
-      - name: Build & test backend
-        run: make check
-
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-
-      - name: Lint frontend
-        run: make lint
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.6.6
 
-      - name: Terraform validate via Makefile
-        run: make tf-validate TERRAFORM_ENV=local
+      - name: Make backend wrapper executable
+        run: chmod +x backend/mvnw
+
+      - name: Full check (backend, frontend)
+        run: make check-core
