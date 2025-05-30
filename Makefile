@@ -57,7 +57,7 @@ tf-init: ## Initialize Terraform
 	cd infra && terraform init
 
 tf-validate: ## Validate Terraform (non-backend, environment-aware)
-	gitcd infra && terraform init -backend=false && terraform validate
+	cd infra && terraform init -backend=false && terraform validate
 
 tf-plan: ## Plan Terraform changes for selected environment
 	cd infra && terraform plan -var-file=environments/$(TERRAFORM_ENV).tfvars
