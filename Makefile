@@ -74,7 +74,11 @@ tf-destroy: ## Destroy Terraform infra for selected environment
 	cd infra && terraform destroy -var-file=environments/$(TERRAFORM_ENV).tfvars -auto-approve
 
 infra-bootstrap: ## Init and apply terraform for selected environment
-	cd infra && terraform init && terraform apply -var-file=environments/$(TERRAFORM_ENV).tfvars -auto-approve
+	cd infra && terraform init && terraform apply cdironments/$(TERRAFORM_ENV).tfvars -auto-approve
+
+seed-localstack: ## Seed LocalStack DynamoDB
+	@echo "Seeding LocalStack DynamoDB..."
+	cd backend && DYNAMODB_ENDPOINT=http://localhost:4566 python scripts/seed_dynamodb.py
 
 # ======================
 # JWT Generation

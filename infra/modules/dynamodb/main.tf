@@ -9,12 +9,20 @@ terraform {
 resource "aws_dynamodb_table" "this" {
   name         = var.table_name
   billing_mode = "PAY_PER_REQUEST"
-  hash_key     = "macAddress"
-  attribute {
-    name = "macAddress"
-    type = "S"
+  hash_key     = var.hash_key
+
+  dynamic "attribute" {
+    for_each = var.attributes
+    content {
+      name = attribute.value.name
+      type = attribute.value.type
+    }
   }
-  tags = {
-    Environment = var.environment
-  }
+
+  tags = merge(
+    {
+      Environment = var.environment
+    },
+    var.tags
+  )
 }
