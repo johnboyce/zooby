@@ -34,7 +34,7 @@ module "activations_table_local" {
   providers   = { aws = aws.localstack }
   count       = var.use_localstack ? 1 : 0
 
-  hash_key   = "macAddress"
+  hash_key = "macAddress"
   attributes = [
     {
       name = "macAddress"
@@ -50,7 +50,7 @@ module "activations_table_aws" {
   providers   = { aws = aws.default }
   count       = var.use_localstack ? 0 : 1
 
-  hash_key   = "macAddress"
+  hash_key = "macAddress"
   attributes = [
     {
       name = "macAddress"
@@ -66,7 +66,7 @@ module "models_table_local" {
   providers   = { aws = aws.localstack }
   count       = var.use_localstack ? 1 : 0
 
-  hash_key   = "model"
+  hash_key = "model"
   attributes = [
     {
       name = "model"
@@ -87,7 +87,7 @@ module "models_table_aws" {
   providers   = { aws = aws.default }
   count       = var.use_localstack ? 0 : 1
 
-  hash_key   = "model"
+  hash_key = "model"
   attributes = [
     {
       name = "model"
@@ -109,7 +109,7 @@ module "inventory_table_local" {
   providers   = { aws = aws.localstack }
   count       = var.use_localstack ? 1 : 0
 
-  hash_key   = "serial_number"
+  hash_key = "serial_number"
   attributes = [
     {
       name = "serial_number"
@@ -129,7 +129,7 @@ module "inventory_table_aws" {
   providers   = { aws = aws.default }
   count       = var.use_localstack ? 0 : 1
 
-  hash_key   = "serial_number"
+  hash_key = "serial_number"
   attributes = [
     {
       name = "serial_number"
