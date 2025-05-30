@@ -27,20 +27,119 @@ provider "aws" {
   }
 }
 
-module "dynamodb_local" {
+module "activations_table_local" {
   source      = "./modules/dynamodb"
-  table_name  = var.dynamodb_table_name
+  table_name  = var.zooby_activations_table_name
   environment = var.environment
   providers   = { aws = aws.localstack }
   count       = var.use_localstack ? 1 : 0
+
+  hash_key = "macAddress"
+  attributes = [
+    {
+      name = "macAddress"
+      type = "S"
+    }
+  ]
 }
 
-module "dynamodb_aws" {
+module "activations_table_aws" {
   source      = "./modules/dynamodb"
-  table_name  = var.dynamodb_table_name
+  table_name  = var.zooby_activations_table_name
   environment = var.environment
   providers   = { aws = aws.default }
   count       = var.use_localstack ? 0 : 1
+
+  hash_key = "macAddress"
+  attributes = [
+    {
+      name = "macAddress"
+      type = "S"
+    }
+  ]
+}
+
+module "models_table_local" {
+  source      = "./modules/dynamodb"
+  table_name  = var.zooby_models_table_name
+  environment = var.environment
+  providers   = { aws = aws.localstack }
+  count       = var.use_localstack ? 1 : 0
+
+  hash_key = "model"
+  attributes = [
+    {
+      name = "model"
+      type = "S"
+    }
+  ]
+
+  tags = {
+    Project = "Zooby"
+  }
+
+}
+
+module "models_table_aws" {
+  source      = "./modules/dynamodb"
+  table_name  = var.zooby_models_table_name
+  environment = var.environment
+  providers   = { aws = aws.default }
+  count       = var.use_localstack ? 0 : 1
+
+  hash_key = "model"
+  attributes = [
+    {
+      name = "model"
+      type = "S"
+    }
+  ]
+
+  tags = {
+    Project = "Zooby"
+  }
+
+
+}
+
+module "inventory_table_local" {
+  source      = "./modules/dynamodb"
+  table_name  = var.zooby_inventory_table_name
+  environment = var.environment
+  providers   = { aws = aws.localstack }
+  count       = var.use_localstack ? 1 : 0
+
+  hash_key = "serial_number"
+  attributes = [
+    {
+      name = "serial_number"
+      type = "S"
+    }
+  ]
+
+  tags = {
+    Project = "Zooby"
+  }
+}
+
+module "inventory_table_aws" {
+  source      = "./modules/dynamodb"
+  table_name  = var.zooby_inventory_table_name
+  environment = var.environment
+  providers   = { aws = aws.default }
+  count       = var.use_localstack ? 0 : 1
+
+  hash_key = "serial_number"
+  attributes = [
+    {
+      name = "serial_number"
+      type = "S"
+    }
+  ]
+
+  tags = {
+    Project = "Zooby"
+  }
 }
 
 module "sqs_local" {

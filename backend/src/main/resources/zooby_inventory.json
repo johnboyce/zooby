@@ -1,0 +1,1502 @@
+[
+  {
+    "serial_number": "SN-ZBX-100-0001",
+    "mac_address": "02:00:00:00:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180137Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0002",
+    "mac_address": "02:00:00:01:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180158Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0003",
+    "mac_address": "02:00:00:02:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180166Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0004",
+    "mac_address": "02:00:00:03:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180174Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0005",
+    "mac_address": "02:00:00:04:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180182Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0006",
+    "mac_address": "02:00:00:05:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180190Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0007",
+    "mac_address": "02:00:00:06:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180198Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0008",
+    "mac_address": "02:00:00:07:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180210Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0009",
+    "mac_address": "02:00:00:08:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180219Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0010",
+    "mac_address": "02:00:00:09:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180227Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0011",
+    "mac_address": "02:00:01:00:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180236Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0012",
+    "mac_address": "02:00:01:01:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180243Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0013",
+    "mac_address": "02:00:01:02:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180251Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0014",
+    "mac_address": "02:00:01:03:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180258Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0015",
+    "mac_address": "02:00:01:04:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180266Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0016",
+    "mac_address": "02:00:01:05:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180273Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0017",
+    "mac_address": "02:00:01:06:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180281Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0018",
+    "mac_address": "02:00:01:07:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180289Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0019",
+    "mac_address": "02:00:01:08:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180297Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0020",
+    "mac_address": "02:00:01:09:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180304Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0021",
+    "mac_address": "02:00:02:00:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180312Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0022",
+    "mac_address": "02:00:02:01:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180320Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0023",
+    "mac_address": "02:00:02:02:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180327Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0024",
+    "mac_address": "02:00:02:03:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180335Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0025",
+    "mac_address": "02:00:02:04:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180343Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0026",
+    "mac_address": "02:00:02:05:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180351Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0027",
+    "mac_address": "02:00:02:06:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180358Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0028",
+    "mac_address": "02:00:02:07:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180369Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0029",
+    "mac_address": "02:00:02:08:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180376Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0030",
+    "mac_address": "02:00:02:09:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180384Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0031",
+    "mac_address": "02:00:03:00:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180390Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0032",
+    "mac_address": "02:00:03:01:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180398Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0033",
+    "mac_address": "02:00:03:02:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180405Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0034",
+    "mac_address": "02:00:03:03:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180413Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0035",
+    "mac_address": "02:00:03:04:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180421Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0036",
+    "mac_address": "02:00:03:05:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180428Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0037",
+    "mac_address": "02:00:03:06:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180436Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0038",
+    "mac_address": "02:00:03:07:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180443Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0039",
+    "mac_address": "02:00:03:08:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180450Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0040",
+    "mac_address": "02:00:03:09:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180457Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0041",
+    "mac_address": "02:00:04:00:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180465Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0042",
+    "mac_address": "02:00:04:01:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180472Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0043",
+    "mac_address": "02:00:04:02:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180479Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0044",
+    "mac_address": "02:00:04:03:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180488Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0045",
+    "mac_address": "02:00:04:04:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180495Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0046",
+    "mac_address": "02:00:04:05:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180503Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0047",
+    "mac_address": "02:00:04:06:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180510Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0048",
+    "mac_address": "02:00:04:07:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180518Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0049",
+    "mac_address": "02:00:04:08:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180525Z"
+  },
+  {
+    "serial_number": "SN-ZBX-100-0050",
+    "mac_address": "02:00:04:09:5A:42",
+    "model": "ZBX-100",
+    "added_at": "2025-05-30T01:14:09.180535Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0001",
+    "mac_address": "02:00:00:00:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180544Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0002",
+    "mac_address": "02:00:00:01:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180551Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0003",
+    "mac_address": "02:00:00:02:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180559Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0004",
+    "mac_address": "02:00:00:03:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180567Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0005",
+    "mac_address": "02:00:00:04:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180574Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0006",
+    "mac_address": "02:00:00:05:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180581Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0007",
+    "mac_address": "02:00:00:06:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180589Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0008",
+    "mac_address": "02:00:00:07:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180596Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0009",
+    "mac_address": "02:00:00:08:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180604Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0010",
+    "mac_address": "02:00:00:09:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180612Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0011",
+    "mac_address": "02:00:01:00:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180620Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0012",
+    "mac_address": "02:00:01:01:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180628Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0013",
+    "mac_address": "02:00:01:02:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180635Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0014",
+    "mac_address": "02:00:01:03:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180643Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0015",
+    "mac_address": "02:00:01:04:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180651Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0016",
+    "mac_address": "02:00:01:05:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180659Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0017",
+    "mac_address": "02:00:01:06:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180667Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0018",
+    "mac_address": "02:00:01:07:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180674Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0019",
+    "mac_address": "02:00:01:08:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180681Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0020",
+    "mac_address": "02:00:01:09:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180689Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0021",
+    "mac_address": "02:00:02:00:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180696Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0022",
+    "mac_address": "02:00:02:01:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180703Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0023",
+    "mac_address": "02:00:02:02:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180711Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0024",
+    "mac_address": "02:00:02:03:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180718Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0025",
+    "mac_address": "02:00:02:04:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180726Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0026",
+    "mac_address": "02:00:02:05:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180734Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0027",
+    "mac_address": "02:00:02:06:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180741Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0028",
+    "mac_address": "02:00:02:07:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180749Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0029",
+    "mac_address": "02:00:02:08:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180757Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0030",
+    "mac_address": "02:00:02:09:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180764Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0031",
+    "mac_address": "02:00:03:00:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180771Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0032",
+    "mac_address": "02:00:03:01:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180779Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0033",
+    "mac_address": "02:00:03:02:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180787Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0034",
+    "mac_address": "02:00:03:03:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180795Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0035",
+    "mac_address": "02:00:03:04:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180802Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0036",
+    "mac_address": "02:00:03:05:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180810Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0037",
+    "mac_address": "02:00:03:06:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180817Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0038",
+    "mac_address": "02:00:03:07:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180825Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0039",
+    "mac_address": "02:00:03:08:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180832Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0040",
+    "mac_address": "02:00:03:09:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180840Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0041",
+    "mac_address": "02:00:04:00:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180847Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0042",
+    "mac_address": "02:00:04:01:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180854Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0043",
+    "mac_address": "02:00:04:02:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180861Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0044",
+    "mac_address": "02:00:04:03:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180870Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0045",
+    "mac_address": "02:00:04:04:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.180878Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0046",
+    "mac_address": "02:00:04:05:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.181074Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0047",
+    "mac_address": "02:00:04:06:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.181083Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0048",
+    "mac_address": "02:00:04:07:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.181090Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0049",
+    "mac_address": "02:00:04:08:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.181097Z"
+  },
+  {
+    "serial_number": "SN-ZBX-200-0050",
+    "mac_address": "02:00:04:09:5A:42",
+    "model": "ZBX-200",
+    "added_at": "2025-05-30T01:14:09.181105Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0001",
+    "mac_address": "02:00:00:00:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181114Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0002",
+    "mac_address": "02:00:00:01:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181121Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0003",
+    "mac_address": "02:00:00:02:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181130Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0004",
+    "mac_address": "02:00:00:03:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181137Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0005",
+    "mac_address": "02:00:00:04:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181318Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0006",
+    "mac_address": "02:00:00:05:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181330Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0007",
+    "mac_address": "02:00:00:06:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181338Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0008",
+    "mac_address": "02:00:00:07:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181347Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0009",
+    "mac_address": "02:00:00:08:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181354Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0010",
+    "mac_address": "02:00:00:09:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181362Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0011",
+    "mac_address": "02:00:01:00:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181370Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0012",
+    "mac_address": "02:00:01:01:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181378Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0013",
+    "mac_address": "02:00:01:02:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181388Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0014",
+    "mac_address": "02:00:01:03:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181396Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0015",
+    "mac_address": "02:00:01:04:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181403Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0016",
+    "mac_address": "02:00:01:05:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181411Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0017",
+    "mac_address": "02:00:01:06:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181418Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0018",
+    "mac_address": "02:00:01:07:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181426Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0019",
+    "mac_address": "02:00:01:08:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181433Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0020",
+    "mac_address": "02:00:01:09:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181440Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0021",
+    "mac_address": "02:00:02:00:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181448Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0022",
+    "mac_address": "02:00:02:01:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181455Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0023",
+    "mac_address": "02:00:02:02:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181463Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0024",
+    "mac_address": "02:00:02:03:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181471Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0025",
+    "mac_address": "02:00:02:04:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181479Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0026",
+    "mac_address": "02:00:02:05:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181487Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0027",
+    "mac_address": "02:00:02:06:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181494Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0028",
+    "mac_address": "02:00:02:07:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181502Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0029",
+    "mac_address": "02:00:02:08:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181511Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0030",
+    "mac_address": "02:00:02:09:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181520Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0031",
+    "mac_address": "02:00:03:00:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181527Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0032",
+    "mac_address": "02:00:03:01:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181535Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0033",
+    "mac_address": "02:00:03:02:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181542Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0034",
+    "mac_address": "02:00:03:03:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181549Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0035",
+    "mac_address": "02:00:03:04:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181557Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0036",
+    "mac_address": "02:00:03:05:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181564Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0037",
+    "mac_address": "02:00:03:06:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181571Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0038",
+    "mac_address": "02:00:03:07:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181579Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0039",
+    "mac_address": "02:00:03:08:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181586Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0040",
+    "mac_address": "02:00:03:09:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181594Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0041",
+    "mac_address": "02:00:04:00:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181601Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0042",
+    "mac_address": "02:00:04:01:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181609Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0043",
+    "mac_address": "02:00:04:02:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181617Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0044",
+    "mac_address": "02:00:04:03:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181624Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0045",
+    "mac_address": "02:00:04:04:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181632Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0046",
+    "mac_address": "02:00:04:05:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181640Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0047",
+    "mac_address": "02:00:04:06:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181647Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0048",
+    "mac_address": "02:00:04:07:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181655Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0049",
+    "mac_address": "02:00:04:08:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181663Z"
+  },
+  {
+    "serial_number": "SN-ZBX-300-0050",
+    "mac_address": "02:00:04:09:5A:42",
+    "model": "ZBX-300",
+    "added_at": "2025-05-30T01:14:09.181671Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0001",
+    "mac_address": "02:00:00:00:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181680Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0002",
+    "mac_address": "02:00:00:01:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181688Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0003",
+    "mac_address": "02:00:00:02:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181696Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0004",
+    "mac_address": "02:00:00:03:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181703Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0005",
+    "mac_address": "02:00:00:04:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181711Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0006",
+    "mac_address": "02:00:00:05:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181718Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0007",
+    "mac_address": "02:00:00:06:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181725Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0008",
+    "mac_address": "02:00:00:07:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181733Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0009",
+    "mac_address": "02:00:00:08:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181740Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0010",
+    "mac_address": "02:00:00:09:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181749Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0011",
+    "mac_address": "02:00:01:00:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181772Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0012",
+    "mac_address": "02:00:01:01:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181780Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0013",
+    "mac_address": "02:00:01:02:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181787Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0014",
+    "mac_address": "02:00:01:03:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181795Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0015",
+    "mac_address": "02:00:01:04:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181801Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0016",
+    "mac_address": "02:00:01:05:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181809Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0017",
+    "mac_address": "02:00:01:06:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181816Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0018",
+    "mac_address": "02:00:01:07:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181823Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0019",
+    "mac_address": "02:00:01:08:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181831Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0020",
+    "mac_address": "02:00:01:09:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181839Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0021",
+    "mac_address": "02:00:02:00:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181852Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0022",
+    "mac_address": "02:00:02:01:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181860Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0023",
+    "mac_address": "02:00:02:02:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181867Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0024",
+    "mac_address": "02:00:02:03:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181877Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0025",
+    "mac_address": "02:00:02:04:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181884Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0026",
+    "mac_address": "02:00:02:05:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181892Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0027",
+    "mac_address": "02:00:02:06:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181900Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0028",
+    "mac_address": "02:00:02:07:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181908Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0029",
+    "mac_address": "02:00:02:08:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181915Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0030",
+    "mac_address": "02:00:02:09:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181923Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0031",
+    "mac_address": "02:00:03:00:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181930Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0032",
+    "mac_address": "02:00:03:01:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181937Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0033",
+    "mac_address": "02:00:03:02:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181944Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0034",
+    "mac_address": "02:00:03:03:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181952Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0035",
+    "mac_address": "02:00:03:04:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181959Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0036",
+    "mac_address": "02:00:03:05:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181967Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0037",
+    "mac_address": "02:00:03:06:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181974Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0038",
+    "mac_address": "02:00:03:07:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181981Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0039",
+    "mac_address": "02:00:03:08:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181988Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0040",
+    "mac_address": "02:00:03:09:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.181996Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0041",
+    "mac_address": "02:00:04:00:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.182004Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0042",
+    "mac_address": "02:00:04:01:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.182011Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0043",
+    "mac_address": "02:00:04:02:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.182020Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0044",
+    "mac_address": "02:00:04:03:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.182028Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0045",
+    "mac_address": "02:00:04:04:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.182035Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0046",
+    "mac_address": "02:00:04:05:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.182043Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0047",
+    "mac_address": "02:00:04:06:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.182050Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0048",
+    "mac_address": "02:00:04:07:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.182057Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0049",
+    "mac_address": "02:00:04:08:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.182065Z"
+  },
+  {
+    "serial_number": "SN-ZBX-400-0050",
+    "mac_address": "02:00:04:09:5A:42",
+    "model": "ZBX-400",
+    "added_at": "2025-05-30T01:14:09.182072Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0001",
+    "mac_address": "02:00:00:00:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182080Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0002",
+    "mac_address": "02:00:00:01:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182091Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0003",
+    "mac_address": "02:00:00:02:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182099Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0004",
+    "mac_address": "02:00:00:03:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182106Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0005",
+    "mac_address": "02:00:00:04:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182115Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0006",
+    "mac_address": "02:00:00:05:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182122Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0007",
+    "mac_address": "02:00:00:06:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182130Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0008",
+    "mac_address": "02:00:00:07:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182138Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0009",
+    "mac_address": "02:00:00:08:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182147Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0010",
+    "mac_address": "02:00:00:09:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182154Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0011",
+    "mac_address": "02:00:01:00:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182161Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0012",
+    "mac_address": "02:00:01:01:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182168Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0013",
+    "mac_address": "02:00:01:02:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182176Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0014",
+    "mac_address": "02:00:01:03:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182183Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0015",
+    "mac_address": "02:00:01:04:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182191Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0016",
+    "mac_address": "02:00:01:05:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182198Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0017",
+    "mac_address": "02:00:01:06:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182206Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0018",
+    "mac_address": "02:00:01:07:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182213Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0019",
+    "mac_address": "02:00:01:08:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182240Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0020",
+    "mac_address": "02:00:01:09:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182249Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0021",
+    "mac_address": "02:00:02:00:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182256Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0022",
+    "mac_address": "02:00:02:01:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182263Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0023",
+    "mac_address": "02:00:02:02:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182270Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0024",
+    "mac_address": "02:00:02:03:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182278Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0025",
+    "mac_address": "02:00:02:04:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182301Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0026",
+    "mac_address": "02:00:02:05:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182309Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0027",
+    "mac_address": "02:00:02:06:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182331Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0028",
+    "mac_address": "02:00:02:07:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182339Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0029",
+    "mac_address": "02:00:02:08:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182347Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0030",
+    "mac_address": "02:00:02:09:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182355Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0031",
+    "mac_address": "02:00:03:00:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182362Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0032",
+    "mac_address": "02:00:03:01:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182370Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0033",
+    "mac_address": "02:00:03:02:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182377Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0034",
+    "mac_address": "02:00:03:03:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182386Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0035",
+    "mac_address": "02:00:03:04:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182394Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0036",
+    "mac_address": "02:00:03:05:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182401Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0037",
+    "mac_address": "02:00:03:06:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182409Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0038",
+    "mac_address": "02:00:03:07:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182416Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0039",
+    "mac_address": "02:00:03:08:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182423Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0040",
+    "mac_address": "02:00:03:09:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182431Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0041",
+    "mac_address": "02:00:04:00:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182439Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0042",
+    "mac_address": "02:00:04:01:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182447Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0043",
+    "mac_address": "02:00:04:02:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182454Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0044",
+    "mac_address": "02:00:04:03:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182461Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0045",
+    "mac_address": "02:00:04:04:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182468Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0046",
+    "mac_address": "02:00:04:05:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182475Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0047",
+    "mac_address": "02:00:04:06:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182483Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0048",
+    "mac_address": "02:00:04:07:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182491Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0049",
+    "mac_address": "02:00:04:08:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182498Z"
+  },
+  {
+    "serial_number": "SN-ZBX-500-0050",
+    "mac_address": "02:00:04:09:5A:42",
+    "model": "ZBX-500",
+    "added_at": "2025-05-30T01:14:09.182505Z"
+  }
+]
