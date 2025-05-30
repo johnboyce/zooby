@@ -1,62 +1,94 @@
-all: build
+# ======================
+# Configuration Variables
+# ======================
+TERRAFORM_ENV ?= local
 
-up:
+# ======================
+# Composite Targets
+# ======================
+all: build ## Default target: build the backend
+
+check: ## Run build, lint, tests, and terraform plan
+	$(MAKE) build
+	$(MAKE) lint
+	$(MAKE) test
+	$(MAKE) tf-plan
+
+check-core:
+	$(MAKE) build
+	$(MAKE) lint
+	$(MAKE) test
+
+# ======================
+# Docker & Backend Targets
+# ======================
+up: ## Start local services using Docker Compose
 	docker-compose up -d
 
-build:
+build: ## Build the backend project
 	cd backend && ./mvnw clean package
 
-frontend:
-	cd frontend && npm ci && npm run build
-
-lint:
-	cd frontend && npm run lint
-
-test:
+test: ## Run backend tests
 	cd backend && ./mvnw test
 
-dev:
+dev: ## Run Quarkus in dev mode
 	cd backend && ./mvnw quarkus:dev
 
-native:
+native: ## Build native image
 	cd backend && ./mvnw clean package -Pnative
 
-native-run:
+native-run: ## Run native binary
 	cd backend && ./target/zooby-backend-1.0.0-runner
 
-deploy-ui:
+# ======================
+# Frontend Targets
+# ======================
+frontend: ## Install deps and build frontend
+	cd frontend && npm ci && npm run build
+
+frontend-dev: ## Start frontend dev server
+	cd frontend && npm run dev
+
+deploy-ui: ## Deploy frontend (e.g., to GitHub Pages)
 	cd frontend && npm run deploy
 
-terraform:
-	cd infra && terraform init && terraform apply -auto-approve
+lint: ## Lint frontend code
+	cd frontend && npm ci && npm run lint
 
-# =======================
-# JWT Generation Commands
-# =======================
-# Usage:
-# make jwt ARGS="<userId> <role> <account> [capability1 capability2 ...]"
-#
-# Where:
-#   <userId>     = unique user identifier (e.g. admin-001)
-#   <role>       = one of: customer, manager, admin
-#   <account>    = account or tenant ID (e.g. acme-inc)
-#   capabilities = optional space-separated list (e.g. restart view-status)
-#
-# Examples:
-# make jwt ARGS="admin-001 admin acme-inc restart delete"
-# make jwt ARGS="manager-002 manager sales-dept view-status"
-# make jwt ARGS="customer-123 customer cust-42"
-#
-# The resulting JWT includes:
-#   "sub"         = userId
-#   "groups"      = [role]
-#   "account"     = account ID
-#   "capabilities" = array of capabilities
-#   "exp"         = 1 hour expiration
-#   "iat"         = issued-at timestamp
+# ======================
+# Terraform Targets
+# ======================
+tf-init: ## Initialize Terraform
+	cd infra && terraform init
 
-jwt:
+tf-validate: ## Validate Terraform (non-backend, environment-aware)
+	cd infra && terraform init -backend=false && terraform validate
+
+tf-plan: ## Plan Terraform changes for selected environment
+	cd infra && terraform plan -var-file=environments/$(TERRAFORM_ENV).tfvars
+
+tf-apply: ## Apply Terraform for selected environment
+	cd infra && terraform apply -var-file=environments/$(TERRAFORM_ENV).tfvars -auto-approve
+
+tf-destroy: ## Destroy Terraform infra for selected environment
+	cd infra && terraform destroy -var-file=environments/$(TERRAFORM_ENV).tfvars -auto-approve
+
+infra-bootstrap: ## Init and apply terraform for selected environment
+	cd infra && terraform init && terraform apply -var-file=environments/$(TERRAFORM_ENV).tfvars -auto-approve
+
+# ======================
+# JWT Generation
+# ======================
+# Usage: make jwt ARGS="<userId> <role> <account> [capability1 capability2 ...]"
+jwt: ## Generate JWT token using TokenCli
 	@cd backend && ./mvnw -q compile exec:java \
 		-Dsmallrye.jwt.sign.key.location=src/main/resources/keys/privateKey.pem \
 		-Dexec.mainClass="com.zooby.security.TokenCli" \
 		-Dexec.args="$(ARGS)" | grep -v "\[INFO\]" | grep -v "\[WARNING\]"
+
+# ======================
+# Help Target
+# ======================
+help: ## Show this help menu
+	@echo "Available targets:"
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-20s %s\n", $$1, $$2}'

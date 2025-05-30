@@ -4,18 +4,21 @@ on:
   push:
     paths:
       - 'backend/**'
+      - 'Makefile'
       - '.github/workflows/backend.yml'
   pull_request:
     paths:
       - 'backend/**'
+      - 'Makefile'
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Build and Test (JVM)
+    name: Build and Test (Makefile)
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: Set up GraalVM for Java 21
         uses: graalvm/setup-graalvm@v1
@@ -28,8 +31,11 @@ jobs:
       - name: Confirm Java version
         run: java -version
 
-      - name: Make executable
+      - name: Make wrapper executable
         run: chmod +x backend/mvnw
 
-      - name: Build with Maven (JVM mode)
-        run: cd backend && ./mvnw clean verify
+      - name: Build backend
+        run: make build
+
+      - name: Run tests
+        run: make test
