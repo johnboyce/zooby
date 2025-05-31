@@ -1,6 +1,6 @@
 package com.zooby.graphql;
 
-import com.zooby.dynamodb.DynamoDBService;
+import com.zooby.repository.DynamoDBService;
 import com.zooby.model.ActivationResponse;
 import com.zooby.model.ActivationStatus;
 import com.zooby.model.EligibilityResult;
@@ -29,7 +29,7 @@ public class ActivationResolver {
     UserContext user;
 
     @Query
-//    @RolesAllowed("customer")
+    @RolesAllowed("customer")
     public ActivationStatus activationStatus(@Name("transactionId") String transactionId) {
         LOG.infof("ActivationStatus: userId=%s, account=%s, roles=%s",
                 user.getUserId(), user.getAccount(), user.getRoles());
@@ -62,7 +62,7 @@ public class ActivationResolver {
 
 
     @Query
-//    @RolesAllowed({"manager", "admin"})
+    @RolesAllowed({"manager", "admin"})
     public EligibilityResult eligibility(@Name("macAddress") String macAddress) {
         LOG.infof("Eligibility check for macAddress=%s by userId=%s", macAddress, user.getUserId());
         if (!user.hasCapability("restart")) {
@@ -74,7 +74,7 @@ public class ActivationResolver {
     }
 
     @Mutation
-//    @RolesAllowed("manager, admin")
+    @RolesAllowed("manager, admin")
     public ActivationResponse activate(@Name("macAddress") String macAddress,
                                        @Name("make") String make,
                                        @Name("model") String model) {

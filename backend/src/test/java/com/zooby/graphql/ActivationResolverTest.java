@@ -1,9 +1,14 @@
 package com.zooby.graphql;
 
-import com.zooby.dynamodb.DynamoDBService;
+import com.zooby.repository.DynamoDBService;
 import com.zooby.model.ActivationStatus;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.junit.mockito.InjectMock;
+import io.quarkus.test.security.TestSecurity;
+import io.restassured.RestAssured;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 
@@ -16,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @QuarkusTest
+@TestSecurity(user = "test-user", roles = { "customer" })
 class ActivationResolverTest {
 
     @InjectMock
@@ -23,6 +29,11 @@ class ActivationResolverTest {
 
     @Inject
     ActivationResolver activationResolver;
+
+    @BeforeAll
+    static void enableLogging() {
+        RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
+    }
 
     @Test
     void testActivationStatusFound() {
