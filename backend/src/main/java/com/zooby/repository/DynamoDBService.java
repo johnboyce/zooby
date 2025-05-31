@@ -1,6 +1,5 @@
-package com.zooby.dynamodb;
+package com.zooby.repository;
 
-import com.zooby.graphql.ActivationResolver;
 import jakarta.annotation.PostConstruct;
 import jakarta.inject.Inject;
 import jakarta.enterprise.context.ApplicationScoped;
