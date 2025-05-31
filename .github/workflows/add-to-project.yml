@@ -10,4 +10,4 @@ jobs:
         uses: actions/add-to-project@v0
         with:
           project-url: https://github.com/users/johnboyce/projects/1
-          github-token: ${{ secrets.YOUR_PAT }}
+          github-token: ${{ secrets.GH_TOKEN }}
