@@ -3,7 +3,7 @@
 **Zooby** is an event-driven AWS-native application that tracks activation events using a modern stack:
 
 - **Backend:** Quarkus (GraphQL API) with native builds via GraalVM
-- **Frontend:** React + Vite + TailwindCSS
+- **Frontend:** NextJS + Turbopack + TailwindCSS
 - **Infra:** Terraform (with LocalStack for local dev)
 - **CI/CD:** GitHub Actions
 - **Deploy:** GitHub Pages + AWS (DynamoDB, Lambda, SQS, SNS)
@@ -19,10 +19,12 @@
 ## 📦 Architecture
 
 ```
-React UI (GitHub Pages)
-         ↓
+NextJS UI 
+     ↓
+NextJS Server
+     ↓
 GraphQL API (Quarkus on Fargate or native local)
-         ↓
+     ↓
 SQS/SNS → Lambda → DynamoDB
 ```
 
@@ -30,15 +32,15 @@ SQS/SNS → Lambda → DynamoDB
 
 ## 🧰 Tech Stack
 
-| Layer        | Tech                            |
-|--------------|----------------------------------|
-| Frontend     | React, Vite, TailwindCSS         |
+| Layer        | Tech                                |
+|--------------|-------------------------------------|
+| Frontend     | NextJS, Turbopack, TailwindCSS      |
 | Backend      | Quarkus (GraphQL, JWT, MDC, native) |
-| Database     | AWS DynamoDB                     |
-| Messaging    | AWS SNS + SQS                    |
-| Dev Infra    | LocalStack, Docker               |
-| Infra-as-Code| Terraform                        |
-| CI/CD        | GitHub Actions                   |
+| Database     | AWS DynamoDB                        |
+| Messaging    | AWS SNS + SQS                       |
+| Dev Infra    | LocalStack, Docker                  |
+| Infra-as-Code| Terraform                           |
+| CI/CD        | GitHub Actions                      |
 
 ---
 
@@ -95,7 +97,7 @@ make infra-deploy    # Applies infra to AWS
 ```
 zooby/
 ├── backend/           # Quarkus GraphQL backend
-├── frontend/          # React frontend (Vite)
+├── frontend/          # NextJS frontend
 ├── infra/             # Terraform definitions
 ├── .github/workflows/ # CI/CD workflows
 └── Makefile           # Automation scripts
