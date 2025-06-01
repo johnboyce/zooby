@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import ActivationStatus from "./components/ActivationStatus";
+import DeploymentInfo from './components/DeploymentInfo';
 
 export default function Home() {
   return (
@@ -46,8 +47,8 @@ export default function Home() {
             <div className="relative h-[300px] w-full flex justify-center items-center">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-cyan-500/10 via-transparent to-transparent"></div>
               <Image
-                src="/images/zoobies.png"
-                alt="Zooby Alpha Model"
+                src={`${process.env.NODE_ENV === 'production' ? '/zooby' : ''}/images/zoobies.png`}
+                alt="Zooby Alpha Models"
                 width={350}
                 height={225}
                 className="rounded-xl shadow-2xl object-contain relative z-10"
@@ -90,6 +91,12 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <footer className="mt-12 py-4 border-t border-cyan-500/10 backdrop-blur-sm bg-black/20">
+        <div className="max-w-6xl mx-auto px-4 flex items-center justify-between">
+          <p className="text-cyan-300/60">&copy; {new Date().getFullYear()} Zooby Dashboard</p>
+          <DeploymentInfo />
+        </div>
+      </footer>
     </main>
   );
 }
