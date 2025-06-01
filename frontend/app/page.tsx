@@ -5,6 +5,7 @@ import DeploymentInfo from './components/DeploymentInfo';
 import { signIn, signOut, useSession } from 'next-auth/react';
 
 export default function Home() {
+  const { data: session, status } = useSession();
   return (
     <main className="min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-cyan-950/20 to-slate-950 text-white p-4 sm:p-6 md:p-8 relative overflow-hidden">
       <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
@@ -19,7 +20,7 @@ export default function Home() {
             <nav className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto bg-black/30 backdrop-blur-md rounded-xl px-4 py-2 shadow-lg border border-cyan-500/10">
               <a href="#" className="text-cyan-400 hover:text-white font-semibold px-4 py-2 rounded-lg transition-all duration-200 border border-transparent hover:bg-cyan-500/10 focus:outline-none focus:ring-2 focus:ring-cyan-400">
                 <span className="inline-flex items-center gap-2">
-                  <img src="/favicon.ico" alt="Zooby Logo" className="w-6 h-6 rounded-full shadow" />
+                  <Image src="/favicon.ico" alt="Zooby Logo" width={24} height={24} className="rounded-full shadow w-6 h-6" />
                   Dashboard
                 </span>
               </a>
@@ -30,53 +31,46 @@ export default function Home() {
                 Settings
               </a>
               <div className="hidden sm:block h-6 w-px bg-cyan-500/20 mx-2"></div>
-              {(() => {
-                const { data: session, status } = useSession();
-                if (status === 'loading') {
-                  return <button className="bg-black/40 text-cyan-300 font-medium px-4 py-2 rounded-lg animate-pulse" disabled>Loading...</button>;
-                }
-                if (session) {
-                  return (
-                    <div className="flex items-center gap-2">
-                      <div className="relative group">
-                        {session.user?.image ? (
-                          <img src={session.user.image} alt="avatar" className="w-8 h-8 rounded-full border-2 border-cyan-400 shadow-md" />
-                        ) : (
-                          <div className="w-8 h-8 rounded-full bg-cyan-900 border-2 border-cyan-400 flex items-center justify-center text-cyan-200 font-bold shadow-md">
-                            {session.user?.name?.[0]?.toUpperCase() || 'U'}
-                          </div>
-                        )}
-                        <span className="absolute left-1/2 -translate-x-1/2 mt-2 px-3 py-1 bg-black/80 text-cyan-100 text-xs rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-20">
-                          {session.user?.name}
-                        </span>
+              {status === 'loading' ? (
+                <button className="bg-black/40 text-cyan-300 font-medium px-4 py-2 rounded-lg animate-pulse" disabled>Loading...</button>
+              ) : session ? (
+                <div className="flex items-center gap-2">
+                  <div className="relative group">
+                    {session.user?.image ? (
+                      <Image src={session.user.image} alt="avatar" width={32} height={32} className="w-8 h-8 rounded-full border-2 border-cyan-400 shadow-md" />
+                    ) : (
+                      <div className="w-8 h-8 rounded-full bg-cyan-900 border-2 border-cyan-400 flex items-center justify-center text-cyan-200 font-bold shadow-md">
+                        {session.user?.name?.[0]?.toUpperCase() || 'U'}
                       </div>
-                      <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300 text-black font-bold text-base drop-shadow-lg px-3 py-1 rounded-full shadow-md animate-pulse border border-cyan-300">
-                        {session.user?.name || session.user?.email || 'User'}
-                      </span>
-                      <button
-                        className="bg-cyan-500/80 hover:bg-cyan-400 text-black font-semibold px-4 py-2 rounded-lg transition-all duration-200 shadow-md border border-cyan-400 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400 flex items-center gap-2 justify-center"
-                        onClick={() => signOut()}
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                        Logout
-                      </button>
-                    </div>
-                  );
-                }
-                return (
+                    )}
+                    <span className="absolute left-1/2 -translate-x-1/2 mt-2 px-3 py-1 bg-black/80 text-cyan-100 text-xs rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-20">
+                      {session.user?.name}
+                    </span>
+                  </div>
+                  <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300 text-black font-bold text-base drop-shadow-lg px-3 py-1 rounded-full shadow-md animate-pulse border border-cyan-300">
+                    {session.user?.name || session.user?.email || 'User'}
+                  </span>
                   <button
-                    className="bg-black/40 text-cyan-300 font-semibold px-4 py-2 rounded-lg hover:bg-cyan-950/50 transition-all duration-200 border border-cyan-500/20 hover:border-cyan-400/50 hover:scale-105 hover:shadow-lg flex items-center gap-2 justify-center focus:outline-none focus:ring-2 focus:ring-cyan-400"
-                    onClick={() => signIn('connellboyce')}
+                    className="bg-cyan-500/80 hover:bg-cyan-400 text-black font-semibold px-4 py-2 rounded-lg transition-all duration-200 shadow-md border border-cyan-400 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400 flex items-center gap-2 justify-center"
+                    onClick={() => signOut()}
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
-                    Login
+                    Logout
                   </button>
-                );
-              })()}
+                </div>
+              ) : (
+                <button
+                  className="bg-black/40 text-cyan-300 font-semibold px-4 py-2 rounded-lg hover:bg-cyan-950/50 transition-all duration-200 border border-cyan-500/20 hover:border-cyan-400/50 hover:scale-105 hover:shadow-lg flex items-center gap-2 justify-center focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                  onClick={() => signIn('connellboyce')}
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  Login
+                </button>
+              )}
             </nav>
           </div>
           <p className="text-cyan-300/60 backdrop-blur-sm bg-black/20 inline-block px-3 sm:px-4 py-2 rounded-lg border border-cyan-500/10 text-sm sm:text-base">
