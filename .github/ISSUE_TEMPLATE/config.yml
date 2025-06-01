@@ -1,0 +1,6 @@
+blank_issues_enabled: true
+defaults:
+  projects: ["Zooby Project"]
+  labels:
+    - needs-triage
+
