@@ -1,20 +1,28 @@
 package com.zooby.model;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
-import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.*;
+import jakarta.json.bind.annotation.JsonbProperty;
+import org.eclipse.microprofile.graphql.Description;
+import org.eclipse.microprofile.graphql.Type;
 
-@DynamoDbBean
+@Type
 @RegisterForReflection
 public class InventoryItem {
-
+    @Description("Unique serial number of the device")
+    @JsonbProperty("serial_number")
     private String serialNumber;
-    private String macAddress;
-    private String model;
-    private String yearMade;
-    private String dimensions;
-    private double weight;
 
-    @DynamoDbPartitionKey
+    @Description("MAC address of the device")
+    @JsonbProperty("mac_address")
+    private String macAddress;
+
+    @Description("Model identifier of the device")
+    private String model;
+
+    @Description("Timestamp when the device was added to inventory")
+    @JsonbProperty("added_at")
+    private String addedAt;
+
     public String getSerialNumber() {
         return serialNumber;
     }
@@ -39,27 +47,11 @@ public class InventoryItem {
         this.model = model;
     }
 
-    public String getYearMade() {
-        return yearMade;
+    public String getAddedAt() {
+        return addedAt;
     }
 
-    public void setYearMade(String yearMade) {
-        this.yearMade = yearMade;
-    }
-
-    public String getDimensions() {
-        return dimensions;
-    }
-
-    public void setDimensions(String dimensions) {
-        this.dimensions = dimensions;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
+    public void setAddedAt(String addedAt) {
+        this.addedAt = addedAt;
     }
 }

@@ -13,19 +13,39 @@ public class ModelResource {
     @Inject
     ZoobyModelService modelService;
 
-    @Query("model")
+    @Query("zoobyModel")
     @Description("Lookup a Zooby model by model number")
-    public Optional<ZoobyModel> getModel(@Name("model") String model) {
+    public Optional<ZoobyModel> getModel(
+            @Name("model")
+            @Description("The model number to look up")
+            @NonNull String model) {
+        if (model == null || model.trim().isEmpty()) {
+            throw new IllegalArgumentException("Model number cannot be empty");
+        }
         return modelService.findByModel(model);
     }
 
-    @Query("models")
+    @Query("zoobyModels")
     @Description("List all Zooby models with pagination and optional filtering")
-    public List<ZoobyModel> listModels(
-        @Name("filter") String filter,
-        @Name("offset") @DefaultValue("0") int offset,
-        @Name("limit") @DefaultValue("10") int limit
+    public @NonNull List<ZoobyModel> listModels(
+            @Name("filter")
+            @Description("Optional text to filter models")
+            String filter,
+
+            @Name("offset")
+            @Description("Number of items to skip")
+            @DefaultValue("0") int offset,
+
+            @Name("limit")
+            @Description("Maximum number of items to return")
+            @DefaultValue("10") int limit
     ) {
+        if (offset < 0) {
+            throw new IllegalArgumentException("Offset cannot be negative");
+        }
+        if (limit < 1) {
+            throw new IllegalArgumentException("Limit must be positive");
+        }
         return modelService.findAll(filter, offset, limit);
     }
 }

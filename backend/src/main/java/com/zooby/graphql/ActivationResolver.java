@@ -3,7 +3,7 @@ package com.zooby.graphql;
 import com.zooby.repository.DynamoDBService;
 import com.zooby.model.ActivationResponse;
 import com.zooby.model.ActivationStatus;
-import com.zooby.model.EligibilityResult;
+import com.zooby.model.Eligibility;
 import com.zooby.security.UserContext;
 import io.quarkus.security.ForbiddenException;
 import jakarta.annotation.security.RolesAllowed;
@@ -63,14 +63,14 @@ public class ActivationResolver {
 
     @Query
     @RolesAllowed({"manager", "admin"})
-    public EligibilityResult eligibility(@Name("macAddress") String macAddress) {
+    public Eligibility eligibility(@Name("macAddress") String macAddress) {
         LOG.infof("Eligibility check for macAddress=%s by userId=%s", macAddress, user.getUserId());
         if (!user.hasCapability("restart")) {
             LOG.warnf("Unauthorized activation attempt by user %s", user.getUserId());
             throw new ForbiddenException("You do not have permission to activate a Zooby.");
         }
         // Simulated logic; could be replaced with actual lookup
-        return new EligibilityResult(macAddress, true, "ZoobyCorp", "ModelZ-9000");
+        return new Eligibility(macAddress, true, "ZoobyCorp", "ModelZ-9000");
     }
 
     @Mutation
