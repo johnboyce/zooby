@@ -1,10 +1,10 @@
 ---
 name: Deployment Bug
-about: Report a deployment-related bug or configuration issue
+about: Issues related to deployment configuration
+title: "[Deploy] "
+projects: ["Zooby Project"]
 labels: bug, deployment
 assignees: ''
-projects: ["Zooby Project"]
-title: "[Deploy] "
 ---
 
 **Current Configuration**
@@ -25,23 +25,3 @@ Current deployment configuration needs updates for:
 # Problematic package versions:
 next: 15.3.2 (non-existent)
 react: ^19.0.0 (non-existent)
-```
-
-**Steps to Reproduce**
-1. ...
-2. ...
-
-**Expected Behavior**
-A clear and concise description of what you expected to happen.
-
-**Proposed Solution**
-Describe your proposed fix or improvement.
-
-**Verification Steps**
-- [ ] Deployment passes
-- [ ] No regressions introduced
-- [ ] Documentation updated
-
-**Additional context**
-Add any other relevant information or links.
-
