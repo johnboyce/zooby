@@ -67,17 +67,6 @@ jobs:
           name: plan-summary-${{ matrix.env }}
           path: infra/plan.txt
 
-      - name: Terraform Apply (manual approval for prod)
-        if: ${{ github.ref == 'refs/heads/main' && matrix.env == 'prod' }}
-        steps:
-          - name: Wait for approval
-            uses: trstringer/manual-approval@v1
-            with:
-              secret: ${{ secrets.GITHUB_TOKEN }}
-              approvers: ${{ github.actor }}
-          - name: Terraform Apply
-            run: make tf-apply TERRAFORM_ENV=prod
-
       - name: Terraform Apply (auto for non-prod)
         if: ${{ github.ref == 'refs/heads/main' && matrix.env != 'prod' }}
         run: make tf-apply TERRAFORM_ENV=${{ matrix.env }}
