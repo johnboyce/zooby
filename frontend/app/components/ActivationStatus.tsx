@@ -40,7 +40,7 @@ export default function ActivationStatus() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [steps.length]);
 
   const statusColor =
     status === "SUCCESS"

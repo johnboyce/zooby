@@ -43,6 +43,7 @@ native-run: ## Run native binary
 # ======================
 # Frontend Targets
 # ======================
+.PHONY: frontend
 frontend: ## Install deps and build frontend
 	cd frontend && npm ci && npm run build
 
