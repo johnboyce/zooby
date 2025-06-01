@@ -49,7 +49,7 @@ frontend: ## Install deps and build frontend
 frontend-dev: ## Start frontend dev server
 	cd frontend && npm run dev
 
-deploy-ui: frontend ## Deploy frontend to GitHub Pages
+ : # frontend -  Deploy frontend to GitHub Pages
  @echo "Deploying to GitHub Pages..."
  @cd frontend && touch out/.nojekyll
  @cd frontend && git add out/ && git commit -m "Deploy to GitHub Pages" || true
