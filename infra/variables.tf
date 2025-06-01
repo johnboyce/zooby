@@ -1,9 +1,38 @@
-variable "environment" { type = string }
-variable "aws_region" { type = string }
+variable "environment" {
+  type        = string
+  description = "The deployment environment (e.g., dev, prod, local)"
+  validation {
+    condition     = contains(["local", "dev", "prod"], var.environment)
+    error_message = "Environment must be one of: local, dev, prod."
+  }
+}
 
-variable "zooby_activations_table_name" { type = string }
-variable "zooby_models_table_name" { type = string }
-variable "zooby_inventory_table_name" { type = string }
+variable "aws_region" {
+  type        = string
+  description = "AWS region to deploy resources into"
+}
 
-variable "sqs_queue_name" { type = string }
-variable "use_localstack" { type = bool }
+variable "zooby_activations_table_name" {
+  type        = string
+  description = "Name of the DynamoDB activations table"
+}
+
+variable "zooby_models_table_name" {
+  type        = string
+  description = "Name of the DynamoDB models table"
+}
+
+variable "zooby_inventory_table_name" {
+  type        = string
+  description = "Name of the DynamoDB inventory table"
+}
+
+variable "sqs_queue_name" {
+  type        = string
+  description = "Name of the SQS queue"
+}
+
+variable "use_localstack" {
+  type        = bool
+  description = "Whether to use LocalStack for local development and testing"
+}

@@ -93,10 +93,16 @@ infra-local:
 
 seed-localstack: ## Seed LocalStack DynamoDB
 	@echo "Seeding LocalStack DynamoDB..."
-	cd backend && DYNAMODB_ENDPOINT=http://localhost:4566 python3 scripts/seed_dynamodb.py
+	DYNAMODB_ENDPOINT=http://localhost:4566 python3 seed/seed_dynamodb.py
 
 run-backend:
 	cd backend && ./mvnw clean compile quarkus:dev
+
+tf-workspace: ## Show or select the current Terraform workspace
+	cd infra && terraform workspace list && terraform workspace show
+
+tf-output: ## Show Terraform outputs for the selected environment
+	cd infra && terraform output
 
 # ======================
 # JWT Generation
@@ -114,3 +120,6 @@ jwt: ## Generate JWT token using TokenCli
 help: ## Show this help menu
 	@echo "Available targets:"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-20s %s\n", $$1, $$2}'
+
+.PHONY: all check check-core up build test dev native native-run frontend frontend-time frontend-dev deploy-ui lint tf-init tf-validate tf-plan tf-apply tf-destroy infra-bootstrap dev-full infra-local seed-localstack run-backend jwt help tf-workspace tf-output
+

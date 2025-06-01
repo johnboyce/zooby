@@ -1,4 +1,12 @@
 terraform {
+  required_version = ">= 1.6.0, < 2.0.0"
+  backend "s3" {
+    bucket         = "zooby-terraform-state"
+    key            = "dev/terraform.tfstate"  # Change 'dev' to your environment as needed
+    region         = "us-east-1"              # Updated to match your actual S3 bucket region
+    dynamodb_table = "zooby-terraform-lock"
+    encrypt        = true
+  }
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -27,20 +35,27 @@ provider "aws" {
   }
 }
 
+locals {
+  common_tags = {
+    Project     = "zooby"
+    Environment = var.environment
+  }
+}
+
 module "activations_table_local" {
   source      = "./modules/dynamodb"
   table_name  = var.zooby_activations_table_name
   environment = var.environment
   providers   = { aws = aws.localstack }
   count       = var.use_localstack ? 1 : 0
-
-  hash_key = "macAddress"
+  hash_key    = "macAddress"
   attributes = [
     {
       name = "macAddress"
       type = "S"
     }
   ]
+  tags = local.common_tags
 }
 
 module "activations_table_aws" {
@@ -49,14 +64,14 @@ module "activations_table_aws" {
   environment = var.environment
   providers   = { aws = aws.default }
   count       = var.use_localstack ? 0 : 1
-
-  hash_key = "macAddress"
+  hash_key    = "macAddress"
   attributes = [
     {
       name = "macAddress"
       type = "S"
     }
   ]
+  tags = local.common_tags
 }
 
 module "models_table_local" {
@@ -65,19 +80,14 @@ module "models_table_local" {
   environment = var.environment
   providers   = { aws = aws.localstack }
   count       = var.use_localstack ? 1 : 0
-
-  hash_key = "model"
+  hash_key    = "model"
   attributes = [
     {
       name = "model"
       type = "S"
     }
   ]
-
-  tags = {
-    Project = "Zooby"
-  }
-
+  tags = local.common_tags
 }
 
 module "models_table_aws" {
@@ -86,20 +96,14 @@ module "models_table_aws" {
   environment = var.environment
   providers   = { aws = aws.default }
   count       = var.use_localstack ? 0 : 1
-
-  hash_key = "model"
+  hash_key    = "model"
   attributes = [
     {
       name = "model"
       type = "S"
     }
   ]
-
-  tags = {
-    Project = "Zooby"
-  }
-
-
+  tags = local.common_tags
 }
 
 module "inventory_table_local" {
@@ -108,52 +112,12 @@ module "inventory_table_local" {
   environment = var.environment
   providers   = { aws = aws.localstack }
   count       = var.use_localstack ? 1 : 0
-
-  hash_key = "serial_number"
+  hash_key    = "serial_number"
   attributes = [
     {
       name = "serial_number"
       type = "S"
     }
   ]
-
-  tags = {
-    Project = "Zooby"
-  }
-}
-
-module "inventory_table_aws" {
-  source      = "./modules/dynamodb"
-  table_name  = var.zooby_inventory_table_name
-  environment = var.environment
-  providers   = { aws = aws.default }
-  count       = var.use_localstack ? 0 : 1
-
-  hash_key = "serial_number"
-  attributes = [
-    {
-      name = "serial_number"
-      type = "S"
-    }
-  ]
-
-  tags = {
-    Project = "Zooby"
-  }
-}
-
-module "sqs_local" {
-  source      = "./modules/sqs"
-  queue_name  = var.sqs_queue_name
-  environment = var.environment
-  providers   = { aws = aws.localstack }
-  count       = var.use_localstack ? 1 : 0
-}
-
-module "sqs_aws" {
-  source      = "./modules/sqs"
-  queue_name  = var.sqs_queue_name
-  environment = var.environment
-  providers   = { aws = aws.default }
-  count       = var.use_localstack ? 0 : 1
+  tags = local.common_tags
 }

@@ -1,0 +1,66 @@
+{
+  "TableName": "zooby-local-models",
+  "partitionKey": "model",
+  "Items": [
+    {
+      "model": "ZBX-100",
+      "name": "Zooby Prism",
+      "features": [
+        "Crystal-core LED status ring",
+        "Nano-pulse wireless uplink",
+        "USB-C + Lightning dual port",
+        "Edge-sense AI calibration"
+      ],
+      "image": "images/prism.png",
+      "description": "Zooby Prism is designed for elegance and clarity in small network nodes. Built for modular edge processing and environmental resilience."
+    },
+    {
+      "model": "ZBX-200",
+      "name": "Zooby Flux",
+      "features": [
+        "Quantum state monitoring module",
+        "Dynamic LED diagnostic strip",
+        "Low-noise optical repeater",
+        "Futuristic magnesium alloy frame"
+      ],
+      "image": "images/flux.png",
+      "description": "The Zooby Flux is a next-gen hub for hybrid mesh networks with precision sensing and real-time diagnostics built in."
+    },
+    {
+      "model": "ZBX-300",
+      "name": "Zooby Orb",
+      "features": [
+        "Holographic notification dome",
+        "Microvector fanless cooling",
+        "360\u00b0 LED activity halo",
+        "Lightning port with surge suppression"
+      ],
+      "image": "images/orb.png",
+      "description": "Zooby Orb delivers immersive diagnostics and interactive lighting, ideal for tech-forward installations and visibility-critical zones."
+    },
+    {
+      "model": "ZBX-400",
+      "name": "Zooby Core",
+      "features": [
+        "Triple-layer security shield",
+        "Heat-adaptive vent system",
+        "2x USB-C data/control ports",
+        "Auto-network healing module"
+      ],
+      "image": "images/core.png",
+      "description": "The Zooby Core is built for backhaul resilience and mission-critical data routing in remote or redundant system cores."
+    },
+    {
+      "model": "ZBX-500",
+      "name": "Zooby Halo",
+      "features": [
+        "Omnidirectional mesh sync light",
+        "Bio-reactive thermal shield",
+        "USB4 + Lightning power sync",
+        "Self-optimizing spectrum antenna"
+      ],
+      "image": "images/halo.png",
+      "description": "A marvel of design and connectivity, the Zooby Halo adapts to its environment with dazzling LED indicators and smart balancing."
+    }
+  ]
+}
