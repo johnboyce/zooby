@@ -18,12 +18,24 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Create deployment timestamp
+        run: |
+          mkdir -p frontend/public
+          echo "{\"deployedAt\": \"$(date -u '+%Y-%m-%dT%H:%M:%SZ')\"}" > frontend/public/deploy-meta.json
+
+      - name: Verify deploy-meta.json
+        run: |
+          test -f frontend/public/deploy-meta.json || (echo "deploy-meta.json not found" && exit 1)
+          cat frontend/public/deploy-meta.json
+          jq . frontend/public/deploy-meta.json || (echo "Invalid JSON" && exit 1)
+
       - name: Build frontend
         run: make frontend
 
-      - name: Create deployment timestamp
+      - name: Verify build output contains deploy-meta.json
         run: |
-          echo "{\"deployedAt\": \"$(date -u '+%Y-%m-%dT%H:%M:%SZ')\"}" > frontend/public/deploy-meta.json
+          test -f frontend/out/deploy-meta.json || (echo "deploy-meta.json not found in build output" && exit 1)
+          cat frontend/out/deploy-meta.json
 
       - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/main'
