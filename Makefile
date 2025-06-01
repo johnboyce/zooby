@@ -49,8 +49,13 @@ frontend: ## Install deps and build frontend
 frontend-dev: ## Start frontend dev server
 	cd frontend && npm run dev
 
-deploy-ui: ## Deploy frontend (e.g., to GitHub Pages)
-	cd frontend && npm run deploy
+deploy-ui: frontend ## Deploy frontend to GitHub Pages
+	@echo "Deploying to GitHub Pages..."
+	@cd frontend && touch out/.nojekyll
+	@cd frontend && git add out/ && git commit -m "Deploy to GitHub Pages" || true
+	@cd frontend && git subtree push --prefix out origin gh-pages || \
+	(git push origin `git subtree split --prefix out HEAD`:gh-pages --force && \
+	echo "Deployed to GitHub Pages")
 
 lint: ## Lint frontend code
 	cd frontend && npm ci && npm run lint
@@ -74,10 +79,9 @@ tf-destroy: ## Destroy Terraform infra for selected environment
 	cd infra && terraform destroy -var-file=environments/$(TERRAFORM_ENV).tfvars -auto-approve
 
 infra-bootstrap: ## Init and apply terraform for selected environment
-	cd infra && terraform init && terraform apply cdironments/$(TERRAFORM_ENV).tfvars -auto-approve
+	cd infra && terraform init && terraform apply -var-file=environments/$(TERRAFORM_ENV).tfvars -auto-approve
 
-
-dev: infra-local seed-localstack run-backend
+dev-full: infra-local seed-localstack run-backend
 
 infra-local:
 	cd infra && terraform apply -var-file=environments/local.tfvars -auto-approve
