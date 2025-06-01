@@ -1,4 +1,4 @@
-name: Deploy UI
+name: Deploy UI to gh pages
 
 on:
   push:
@@ -18,14 +18,12 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install dependencies and build
-        run: |
-          cd frontend
-          npm ci
-          npm run build
+      - name: Build frontend
+        run: make frontend
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./frontend/out
+          folder: frontend/out
+          branch: gh-pages
