@@ -79,10 +79,9 @@ tf-destroy: ## Destroy Terraform infra for selected environment
 	cd infra && terraform destroy -var-file=environments/$(TERRAFORM_ENV).tfvars -auto-approve
 
 infra-bootstrap: ## Init and apply terraform for selected environment
-	cd infra && terraform init && terraform apply cdironments/$(TERRAFORM_ENV).tfvars -auto-approve
+  cd infra && terraform init && terraform apply -var-file=environments/$(TERRAFORM_ENV).tfvars -auto-approve
 
-
-dev: infra-local seed-localstack run-backend
+dev-full: infra-local seed-localstack run-backend
 
 infra-local:
 	cd infra && terraform apply -var-file=environments/local.tfvars -auto-approve
