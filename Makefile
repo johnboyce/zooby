@@ -47,7 +47,11 @@ native-run: ## Run native binary
 frontend: ## Install deps and build frontend
 	cd frontend && npm ci && npm run build
 
-frontend-dev: ## Start frontend dev server
+frontend-time:
+	echo '{"deployedAt": "'$(date -u '+%Y-%m-%dT%H:%M:%SZ')'"}' > frontend/public/deploy-meta.json
+	@echo "Frontend deployment time updated."
+
+frontend-dev: frontend-time ## Start frontend dev server
 	cd frontend && npm run dev
 
 deploy-ui: frontend ## Deploy frontend to GitHub Pages
