@@ -121,3 +121,19 @@ module "inventory_table_local" {
   ]
   tags = local.common_tags
 }
+
+module "inventory_table_aws" {
+  source      = "./modules/dynamodb"
+  table_name  = var.zooby_inventory_table_name
+  environment = var.environment
+  providers   = { aws = aws.default }
+  count       = var.use_localstack ? 0 : 1
+  hash_key    = "serial_number"
+  attributes = [
+    {
+      name = "serial_number"
+      type = "S"
+    }
+  ]
+  tags = local.common_tags
+}

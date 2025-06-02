@@ -7,22 +7,19 @@ import os
 import boto3
 
 def get_dynamodb_client():
-  endpoint_url = os.environ.get("DYNAMODB_ENDPOINT")
-  if endpoint_url:
-    return boto3.client(
-      "dynamodb",
-      region_name=os.environ.get("AWS_REGION", "us-east-1"),
-      aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID", "test"),
-      aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY", "test"),
-      endpoint_url=endpoint_url,
-    )
-  else:
-    return boto3.client(
-      "dynamodb",
-      region_name=os.environ.get("AWS_REGION", "us-east-1"),
-      aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID", "test"),
-      aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY", "test"),
-    )
+  target_env = os.environ.get("ENV", "local")
+  aws_access_key_id = os.environ.get("AWS_ACCESS_KEY_ID")
+  aws_secret_access_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
+  region_name = os.environ.get("AWS_REGION", "us-east-1")
+  endpoint_url = os.environ.get("DYNAMODB_ENDPOINT") if target_env == "local" else None
+
+  return boto3.client(
+    "dynamodb",
+    region_name=region_name,
+    aws_access_key_id=aws_access_key_id,
+    aws_secret_access_key=aws_secret_access_key,
+    endpoint_url=endpoint_url,
+  )
 
 def convert_to_dynamo_type(value):
   if isinstance(value, bool):

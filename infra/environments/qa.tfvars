@@ -1,6 +1,6 @@
 environment         = "qa"
 aws_region          = "us-east-1"
-dynamodb_table_name = "zooby-qa-activations"
+
 sqs_queue_name      = "zooby-qa-queue"
 use_localstack      = false
 
