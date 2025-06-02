@@ -69,10 +69,10 @@ lint: ## Lint frontend code
 # Terraform Targets
 # ======================
 tf-init: ## Initialize Terraform
-	cd infra && terraform init
+	cd infra && terraform init -backend-config=backend/$(TERRAFORM_ENV).backend.conf
 
 tf-validate: ## Validate Terraform (non-backend, environment-aware)
-	cd infra && terraform init -backend=false && terraform validate
+	cd infra && terraform init -backend-config=backend/$(TERRAFORM_ENV).backend.conf -backend=false && terraform validate
 
 tf-plan: ## Plan Terraform changes for selected environment
 	cd infra && terraform plan -var-file=environments/$(TERRAFORM_ENV).tfvars
@@ -84,7 +84,7 @@ tf-destroy: ## Destroy Terraform infra for selected environment
 	cd infra && terraform destroy -var-file=environments/$(TERRAFORM_ENV).tfvars -auto-approve
 
 infra-bootstrap: ## Init and apply terraform for selected environment
-	cd infra && terraform init && terraform apply -var-file=environments/$(TERRAFORM_ENV).tfvars -auto-approve
+	cd infra && terraform init -backend-config=backend/$(TERRAFORM_ENV).backend.conf && terraform apply -var-file=environments/$(TERRAFORM_ENV).tfvars -auto-approve
 
 dev-full: infra-local seed-localstack run-backend
 
