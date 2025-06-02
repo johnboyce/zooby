@@ -3,15 +3,26 @@ import json
 import boto3
 from pathlib import Path
 
+import os
+import boto3
+
 def get_dynamodb_client():
-  endpoint_url = os.environ.get("DYNAMODB_ENDPOINT", "http://localhost:4566")
-  return boto3.client(
-    "dynamodb",
-    region_name=os.environ.get("AWS_REGION", "us-east-1"),
-    aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID", "test"),
-    aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY", "test"),
-    endpoint_url=endpoint_url,
-  )
+  endpoint_url = os.environ.get("DYNAMODB_ENDPOINT")
+  if endpoint_url:
+    return boto3.client(
+      "dynamodb",
+      region_name=os.environ.get("AWS_REGION", "us-east-1"),
+      aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID", "test"),
+      aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY", "test"),
+      endpoint_url=endpoint_url,
+    )
+  else:
+    return boto3.client(
+      "dynamodb",
+      region_name=os.environ.get("AWS_REGION", "us-east-1"),
+      aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID", "test"),
+      aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY", "test"),
+    )
 
 def convert_to_dynamo_type(value):
   if isinstance(value, bool):
@@ -31,9 +42,13 @@ def seed_table_from_json(client, json_file):
   with json_file.open() as f:
     data = json.load(f)
 
+  target_env = os.environ.get("ENV", "local")
   table_name = data.get("TableName")
   if not table_name:
-    table_name = f"zooby-local-{json_file.stem}"
+    table_name = f"zooby-{target_env}-{json_file.stem}"
+
+  # Replace 'local' in table_name with target_env
+  table_name = table_name.replace("local", target_env)
 
   partition_key = data.get("partitionKey", "serial_number")
   items = data.get("Items") or data.get("items") or data
@@ -67,7 +82,7 @@ def seed_table_from_json(client, json_file):
       )
       print(f"Success: inserted item with {partition_key}={item[partition_key]}")
     except Exception as e:
-      print(f"Failed: {str(e)}")
+      print(f"Failed to insert item: {item}. Error: {str(e)}")
 
 def main():
   schema_dir = Path(__file__).parent / "dynamodb"

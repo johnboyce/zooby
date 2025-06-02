@@ -95,6 +95,14 @@ seed-localstack: ## Seed LocalStack DynamoDB
 	@echo "Seeding LocalStack DynamoDB..."
 	DYNAMODB_ENDPOINT=http://localhost:4566 python3 seed/seed_dynamodb.py
 
+seed-qa: ## Seed QA DynamoDB
+	@echo "Seeding QA DynamoDB..."
+	ENV=qa python3 seed/seed_dynamodb.py
+
+seed-prod: ## Seed PROD DynamoDB
+	@echo "Seeding Prod DynamoDB..."
+	ENV=prod python3 seed/seed_dynamodb.py
+
 run-backend:
 	cd backend && ./mvnw clean compile quarkus:dev
 

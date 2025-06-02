@@ -16,7 +16,7 @@ jobs:
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_DEFAULT_REGION: us-east-2
+      AWS_DEFAULT_REGION: us-east-1
     name: Format, Validate & Plan
 
     steps:
@@ -32,10 +32,10 @@ jobs:
         run: cd infra && terraform fmt -check
 
       - name: Validate (Makefile)
-        run: make tf-validate TERRAFORM_ENV=local
+        run: make tf-validate TERRAFORM_ENV=qa
 
       - name: Plan (Makefile)
-        run: make tf-plan TERRAFORM_ENV=local
+        run: make tf-plan TERRAFORM_ENV=qa
 
       - name: Upload plan artifact
         if: success()

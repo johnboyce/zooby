@@ -1,9 +1,9 @@
 variable "environment" {
   type        = string
-  description = "The deployment environment (e.g., dev, prod, local)"
+  description = "The deployment environment (e.g., qa, prod, local)"
   validation {
-    condition     = contains(["local", "dev", "prod"], var.environment)
-    error_message = "Environment must be one of: local, dev, prod."
+    condition     = contains(["local", "qa", "prod"], var.environment)
+    error_message = "Environment must be one of: local, qa, prod."
   }
 }
 
