@@ -2,7 +2,7 @@ terraform {
   required_version = ">= 1.6.0, < 2.0.0"
   backend "s3" {
     bucket         = "zooby-terraform-state"
-    key            = "dev/terraform.tfstate" # Change 'dev' to your environment as needed
+    key            = "${var.environment}/terraform.tfstate" # Change 'dev' to your environment as needed
     region         = "us-east-1"             # Updated to match your actual S3 bucket region
     dynamodb_table = "zooby-terraform-lock"
     encrypt        = true
