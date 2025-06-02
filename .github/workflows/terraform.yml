@@ -27,21 +27,11 @@ jobs:
           terraform_version: 1.6.6
 
       - name: Init
-        run: cd infra && terraform init -backend-config="key=qa/terraform.tfstate"
-
-      - name: Validate
-        run: terraform validate -var-file="infra/environments/qa.tfvars"
+        run: make tf-init TERRAFORM_ENV=qa
 
       - name: Plan
-        run: terraform plan -var-file="infra/environments/qa.tfvars"
-
-      - name: Upload plan artifact
-        if: success()
-        uses: actions/upload-artifact@v4
-        with:
-          name: tf-plan-output
-          path: infra/.terraform
+        run: make tf-plan TERRAFORM_ENV=qa
 
       - name: Apply
         if: github.event_name == 'push' && success()
-        run: terraform apply -auto-approve -var-file="infra/environments/qa.tfvars"
+        run: make tf-apply TERRAFORM_ENV=qa
