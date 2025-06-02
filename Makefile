@@ -69,10 +69,10 @@ lint: ## Lint frontend code
 # Terraform Targets
 # ======================
 tf-init: ## Initialize Terraform
-	cd infra && terraform init
+	cd infra && terraform init -backend-config=backend/$(TERRAFORM_ENV).backend.conf
 
 tf-validate: ## Validate Terraform (non-backend, environment-aware)
-	cd infra && terraform init -backend=false && terraform validate
+	cd infra && terraform init -backend-config=backend/$(TERRAFORM_ENV).backend.conf -backend=false && terraform validate
 
 tf-plan: ## Plan Terraform changes for selected environment
 	cd infra && terraform plan -var-file=environments/$(TERRAFORM_ENV).tfvars
@@ -84,7 +84,7 @@ tf-destroy: ## Destroy Terraform infra for selected environment
 	cd infra && terraform destroy -var-file=environments/$(TERRAFORM_ENV).tfvars -auto-approve
 
 infra-bootstrap: ## Init and apply terraform for selected environment
-	cd infra && terraform init && terraform apply -var-file=environments/$(TERRAFORM_ENV).tfvars -auto-approve
+	cd infra && terraform init -backend-config=backend/$(TERRAFORM_ENV).backend.conf && terraform apply -var-file=environments/$(TERRAFORM_ENV).tfvars -auto-approve
 
 dev-full: infra-local seed-localstack run-backend
 
@@ -93,10 +93,24 @@ infra-local:
 
 seed-localstack: ## Seed LocalStack DynamoDB
 	@echo "Seeding LocalStack DynamoDB..."
-	cd backend && DYNAMODB_ENDPOINT=http://localhost:4566 python3 scripts/seed_dynamodb.py
+	DYNAMODB_ENDPOINT=http://localhost:4566 python3 seed/seed_dynamodb.py
+
+seed-qa: ## Seed QA DynamoDB
+	@echo "Seeding QA DynamoDB..."
+	ENV=qa python3 seed/seed_dynamodb.py
+
+seed-prod: ## Seed PROD DynamoDB
+	@echo "Seeding Prod DynamoDB..."
+	ENV=prod python3 seed/seed_dynamodb.py
 
 run-backend:
 	cd backend && ./mvnw clean compile quarkus:dev
+
+tf-workspace: ## Show or select the current Terraform workspace
+	cd infra && terraform workspace list && terraform workspace show
+
+tf-output: ## Show Terraform outputs for the selected environment
+	cd infra && terraform output
 
 # ======================
 # JWT Generation
@@ -114,3 +128,6 @@ jwt: ## Generate JWT token using TokenCli
 help: ## Show this help menu
 	@echo "Available targets:"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-20s %s\n", $$1, $$2}'
+
+.PHONY: all check check-core up build test dev native native-run frontend frontend-time frontend-dev deploy-ui lint tf-init tf-validate tf-plan tf-apply tf-destroy infra-bootstrap dev-full infra-local seed-localstack run-backend jwt help tf-workspace tf-output
+
