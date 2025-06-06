@@ -36,3 +36,15 @@ variable "use_localstack" {
   type        = bool
   description = "Whether to use LocalStack for local development and testing"
 }
+<<<<<<< Updated upstream
+=======
+
+variable "frontend_service_name" {
+  type = string
+}
+
+variable "nextauth_url" {
+  description = "The public URL for the frontend used by NextAuth"
+  type        = string
+}
+>>>>>>> Stashed changes
