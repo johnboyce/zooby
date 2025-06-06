@@ -33,7 +33,12 @@ output "github_actions_role_arn" {
   value       = module.github_oidc.role_arn
 }
 
-# output "apprunner_service_url" {
-#   description = "Public URL of the App Runner service"
-#   value       = module.apprunner_qa.frontend_url
-# }
+output "apprunner_qa_service_url" {
+  value       = module.apprunner_qa.service_url
+  description = "QA App Runner service URL"
+}
+
+output "apprunner_qa_service_arn" {
+  value       = module.apprunner_qa.service_arn
+  description = "QA App Runner service ARN"
+}

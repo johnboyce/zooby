@@ -145,3 +145,22 @@ module "github_oidc" {
   repo_name  = "johnboyce/zooby"
   role_name  = "zooby-github-actions-role"
 }
+
+module "apprunner_qa" {
+  source = "./modules/apprunner"
+
+  service_name     = var.frontend_service_name
+  image_identifier = "020157571320.dkr.ecr.${var.aws_region}.amazonaws.com/zooby-frontend:latest"
+  environment      = var.environment
+  aws_region       = var.aws_region
+
+  port   = "3000"
+  cpu    = "1024"
+  memory = "2048"
+
+  env_vars = {
+    NODE_ENV        = "production"
+    NEXTAUTH_URL    = "https://zooby-frontend-qa.example.com" # 🔁 Update to real domain
+    NEXTAUTH_SECRET = "john"                          # 🔐 Use Terraform external ref if needed
+  }
+}

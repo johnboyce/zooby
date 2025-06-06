@@ -1,47 +1,48 @@
-resource "aws_apprunner_connection" "github" {
-  connection_name = var.connection_name
-  provider_type   = "GITHUB"
+resource "aws_iam_role" "apprunner_ecr_access" {
+  name = "${var.service_name}-access-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [{
+      Effect = "Allow",
+      Principal = {
+        Service = "build.apprunner.amazonaws.com"
+      },
+      Action = "sts:AssumeRole"
+    }]
+  })
 }
+
+resource "aws_iam_role_policy_attachment" "ecr_read" {
+  role       = aws_iam_role.apprunner_ecr_access.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+}
+
 
 resource "aws_apprunner_service" "frontend" {
   service_name = var.service_name
 
   source_configuration {
+    image_repository {
+      image_identifier      = var.image_identifier
+      image_repository_type = "ECR"
+      image_configuration {
+        port = var.port
+
+        runtime_environment_variables = var.env_vars
+      }
+    }
+
     authentication_configuration {
-      connection_arn = aws_apprunner_connection.github.arn
+      access_role_arn = aws_iam_role.apprunner_ecr_access.arn
     }
 
-    code_repository {
-      repository_url = var.repository_url
-
-      source_code_version {
-        type  = "BRANCH"
-        value = var.branch
-      }
-
-      source_directory = var.source_directory  # ✅ ADD THIS LINE
-
-      code_configuration {
-        configuration_source = "API"
-        code_configuration_values {
-          runtime       = "NODEJS_16"
-          build_command = "npm install && npm run build"
-          start_command = "npm run start"
-          port          = "3000"
-          runtime_environment_variables = {
-            NODE_ENV = "production"
-          }
-        }
-      }
-    }
-
-
-    auto_deployments_enabled = true
+    auto_deployments_enabled = false
   }
 
   instance_configuration {
-    cpu    = "1024"
-    memory = "2048"
+    cpu    = var.cpu
+    memory = var.memory
   }
 
   tags = {

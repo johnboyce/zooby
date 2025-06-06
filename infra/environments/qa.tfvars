@@ -10,6 +10,3 @@ zooby_inventory_table_name   = "zooby-qa-inventory"
 
 
 frontend_service_name    = "zooby-frontend-qa"
-frontend_repo_url        = "https://github.com/YOUR-ORG/zooby-frontend"
-frontend_branch          = "qa"
-frontend_connection_arn  = "arn:aws:apprunner:us-east-1:123456789012:connection/github-connection-id"
