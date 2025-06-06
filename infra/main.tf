@@ -139,3 +139,11 @@ module "frontend_ecr" {
   repo_name   = "zooby-frontend"
   environment = var.environment
 }
+
+module "github_oidc" {
+  source     = "./modules/github_oidc"
+  role_name  = "zooby-github-actions-role"
+  repo_name  = "johnboyce/zooby"
+  branch     = "main"
+}
+

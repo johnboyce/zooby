@@ -28,6 +28,11 @@ output "zooby_inventory_table_name" {
   description = "The name of the DynamoDB inventory table deployed in the selected environment."
 }
 
+output "github_actions_role_arn" {
+  description = "OIDC role ARN for GitHub Actions"
+  value       = module.github_oidc.role_arn
+}
+
 # output "apprunner_service_url" {
 #   description = "Public URL of the App Runner service"
 #   value       = module.apprunner_qa.frontend_url
