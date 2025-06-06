@@ -1,9 +1,4 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  distDir: 'out',
-  basePath: process.env.NODE_ENV === 'production' ? '/zooby' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/zooby' : '',
+const nextConfig = {
   images: {
     unoptimized: true,
   },

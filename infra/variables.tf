@@ -36,3 +36,25 @@ variable "use_localstack" {
   type        = bool
   description = "Whether to use LocalStack for local development and testing"
 }
+
+variable "frontend_service_name" {
+  type = string
+}
+
+variable "frontend_repo_url" {
+  type = string
+}
+
+variable "frontend_branch" {
+  type = string
+}
+
+variable "frontend_connection_arn" {
+  type = string
+}
+
+variable "source_dir" {
+  description = "Path to the frontend app inside the repo"
+  type        = string
+  default     = "frontend"
+}

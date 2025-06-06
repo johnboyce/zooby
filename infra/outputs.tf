@@ -27,3 +27,8 @@ output "zooby_inventory_table_name" {
   value       = length(module.inventory_table_aws) > 0 ? module.inventory_table_aws[0].table_name : null
   description = "The name of the DynamoDB inventory table deployed in the selected environment."
 }
+
+# output "apprunner_service_url" {
+#   description = "Public URL of the App Runner service"
+#   value       = module.apprunner_qa.frontend_url
+# }

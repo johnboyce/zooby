@@ -133,3 +133,9 @@ module "inventory_table_aws" {
   ]
   tags = local.common_tags
 }
+
+module "frontend_ecr" {
+  source      = "./modules/ecr"
+  repo_name   = "zooby-frontend"
+  environment = var.environment
+}
