@@ -40,3 +40,8 @@ variable "use_localstack" {
 variable "frontend_service_name" {
   type = string
 }
+
+variable "nextauth_url" {
+  type        = string
+  description = "Public URL of the deployed frontend used for NextAuth callback"
+}

@@ -160,7 +160,7 @@ module "apprunner_qa" {
 
   env_vars = {
     NODE_ENV        = "production"
-    NEXTAUTH_URL    = "https://zooby-frontend-qa.example.com" # 🔁 Update to real domain
+    NEXTAUTH_URL    = var.nextauth_url
     NEXTAUTH_SECRET = "john"                          # 🔐 Use Terraform external ref if needed
   }
 }
