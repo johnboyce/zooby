@@ -1,0 +1,54 @@
+name: Build and Push Frontend Docker Image to ECR
+
+on:
+  push:
+    branches:
+      - feat/ui_to_aws_qa_33
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/frontend-docker-build.yml'
+      - 'Dockerfile'
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build-and-push:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_REGION: us-east-1
+      ECR_REGISTRY: 020157571320.dkr.ecr.us-east-1.amazonaws.com
+      ECR_REPOSITORY: zooby-frontend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials via GitHub OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::020157571320:role/zooby-github-actions-role
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Set short SHA
+        run:
+          echo "SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+
+      - name: Build Docker image with tags
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:qa \
+                       -t $ECR_REGISTRY/$ECR_REPOSITORY:$SHORT_SHA \
+                       -t $ECR_REGISTRY/$ECR_REPOSITORY:latest \
+                       ./frontend
+
+      - name: Push all tags
+        run: |
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:qa
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$SHORT_SHA
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
