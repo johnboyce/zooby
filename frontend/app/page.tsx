@@ -84,7 +84,7 @@ export default function Home() {
             <div className="relative h-48 sm:h-[300px] w-full flex justify-center items-center">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-cyan-500/10 via-transparent to-transparent"></div>
               <Image
-                src={`${process.env.NODE_ENV === 'production' ? '/zooby' : ''}/images/zoobies.png`}
+                src="/images/zoobies.png"
                 alt="Zooby Alpha Models"
                 width={350}
                 height={225}

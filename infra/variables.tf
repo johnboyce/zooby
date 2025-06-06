@@ -36,3 +36,7 @@ variable "use_localstack" {
   type        = bool
   description = "Whether to use LocalStack for local development and testing"
 }
+
+variable "frontend_service_name" {
+  type = string
+}

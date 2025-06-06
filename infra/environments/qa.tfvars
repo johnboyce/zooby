@@ -7,3 +7,6 @@ use_localstack      = false
 zooby_activations_table_name = "zooby-qa-activations"
 zooby_models_table_name      = "zooby-qa-models"
 zooby_inventory_table_name   = "zooby-qa-inventory"
+
+
+frontend_service_name    = "zooby-frontend-qa"

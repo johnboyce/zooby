@@ -69,10 +69,10 @@ lint: ## Lint frontend code
 # Terraform Targets
 # ======================
 tf-init: ## Initialize Terraform
-	cd infra && terraform init -backend-config=backend/$(TERRAFORM_ENV).backend.conf
+	cd infra && terraform init -backend-config=backend/$(TERRAFORM_ENV).backend.conf $(if $(RECONFIGURE),-reconfigure)
 
-tf-validate: ## Validate Terraform (non-backend, environment-aware)
-	cd infra && terraform init -backend-config=backend/$(TERRAFORM_ENV).backend.conf -backend=false && terraform validate
+tf-validate:
+	cd infra && terraform validate
 
 tf-plan: ## Plan Terraform changes for selected environment
 	cd infra && terraform plan -var-file=environments/$(TERRAFORM_ENV).tfvars

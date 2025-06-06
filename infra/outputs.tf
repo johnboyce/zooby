@@ -27,3 +27,18 @@ output "zooby_inventory_table_name" {
   value       = length(module.inventory_table_aws) > 0 ? module.inventory_table_aws[0].table_name : null
   description = "The name of the DynamoDB inventory table deployed in the selected environment."
 }
+
+output "github_actions_role_arn" {
+  description = "OIDC role ARN for GitHub Actions"
+  value       = module.github_oidc.role_arn
+}
+
+output "apprunner_qa_service_url" {
+  value       = module.apprunner_qa.service_url
+  description = "QA App Runner service URL"
+}
+
+output "apprunner_qa_service_arn" {
+  value       = module.apprunner_qa.service_arn
+  description = "QA App Runner service ARN"
+}
