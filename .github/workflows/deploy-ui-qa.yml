@@ -15,6 +15,7 @@ jobs:
   deploy:
     name: Build & Deploy Frontend to QA
     runs-on: ubuntu-latest
+
     permissions:
       id-token: write
       contents: read
@@ -31,9 +32,16 @@ jobs:
         run: |
           echo "GITHUB_REPOSITORY=${GITHUB_REPOSITORY}"
           echo "GITHUB_REF=${GITHUB_REF}"
+          echo "ACTOR: $GITHUB_ACTOR"
+          echo "SHA: $GITHUB_SHA"
+          echo "GITHUB_WORKFLOW: $GITHUB_WORKFLOW"
+          echo "env ACCOUNT_ID: ${{ env.ACCOUNT_ID }}"
+          echo "env AWS_REGION: ${{ env.AWS_REGION }}"
+          echo "Role to assume: arn:aws:iam::${{ env.ACCOUNT_ID }}:role/zooby-github-actions-role"
+          echo "GITHUB_CONTEXT: ${{ toJson(github) }}"
 
       - name: Configure AWS credentials via OIDC
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v4.0.2
         with:
           role-to-assume: arn:aws:iam::${{ env.ACCOUNT_ID }}:role/zooby-github-actions-role
           aws-region: ${{ env.AWS_REGION }}
