@@ -11,4 +11,4 @@ zooby_inventory_table_name   = "zooby-qa-inventory"
 frontend_service_name    = "zooby-frontend-qa"
 
 nextauth_url = "https://7qdnizqzpi.us-east-1.awsapprunner.com"
-
+oauth_client_secret = "tgpY40U6Ozuf804U/g8oMQORh4fPDWdRiPXN2hLrSKw="

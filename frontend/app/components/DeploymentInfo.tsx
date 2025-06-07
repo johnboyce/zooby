@@ -7,7 +7,7 @@ export default function DeploymentInfo() {
   const [isDefault, setIsDefault] = useState(true);
 
   useEffect(() => {
-    fetch(`${process.env.NODE_ENV === 'production' ? '/zooby' : ''}/deploy-meta.json`)
+    fetch("deploy-meta.json")
       .then(res => res.json())
       .then(() => {
         setIsDefault(false);

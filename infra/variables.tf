@@ -45,3 +45,8 @@ variable "nextauth_url" {
   type        = string
   description = "Public URL of the deployed frontend used for NextAuth callback"
 }
+
+variable "oauth_client_secret" {
+  description = "OAuth client secret used by NextAuth"
+  type        = string
+}
