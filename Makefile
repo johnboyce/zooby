@@ -112,6 +112,44 @@ tf-workspace: ## Show or select the current Terraform workspace
 tf-output: ## Show Terraform outputs for the selected environment
 	cd infra && terraform output
 
+# ----------- CONFIG -----------
+AWS_REGION       := us-east-1
+ACCOUNT_ID       := 020157571320
+IMAGE_NAME       := zooby-frontend
+ECR_URI          := $(ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(IMAGE_NAME)
+GIT_SHA          := $(shell git rev-parse --short HEAD)
+TAG              := $(GIT_SHA)
+SERVICE_ARN      := arn:aws:apprunner:$(AWS_REGION):$(ACCOUNT_ID):service/zooby-frontend-qa/3dd179a234f74a128c01728dba6aeda7
+
+# ----------- TARGETS -----------
+
+deploy-qa-ui: push-image trigger-apprunner print-version
+
+push-image: login-ecr
+	echo '{ \
+  	  "gitSha": "$(GIT_SHA)", \
+  	  "deployedAt": "'$$(date -u +"%Y-%m-%dT%H:%M:%SZ")'" \
+  	}' > ./frontend/public/deploy-meta.json
+	docker build -t $(ECR_URI):$(TAG) -t $(ECR_URI):qa -t $(ECR_URI):latest --build-arg GIT_SHA=$(GIT_SHA) ./frontend
+	docker push $(ECR_URI):$(TAG)
+	docker push $(ECR_URI):qa
+	docker push $(ECR_URI):latest
+
+login-ecr:
+	@echo "Logging in to ECR..."
+	aws ecr get-login-password --region $(AWS_REGION) | \
+	docker login --username AWS --password-stdin $(ECR_URI)
+
+trigger-apprunner:
+	@echo "Triggering App Runner deployment with tag $(TAG)..."
+	aws apprunner update-service \
+		--service-arn $(SERVICE_ARN) \
+		--source-configuration ImageRepository="{ImageIdentifier=$(ECR_URI):$(TAG),ImageRepositoryType=ECR,ImageConfiguration={Port=3000}}" \
+		--region $(AWS_REGION)
+
+print-version:
+	@echo "✅ Deployed version: $(TAG)"
+
 # ======================
 # JWT Generation
 # ======================

@@ -1,6 +1,9 @@
 # Stage 1: Build
 FROM node:18-alpine AS builder
 
+ARG GIT_SHA
+ENV GIT_SHA=$GIT_SHA
+
 WORKDIR /app
 
 # Copy only package files first for caching
@@ -10,6 +13,8 @@ COPY next.config.ts ./
 COPY postcss.config.mjs ./
 COPY eslint.config.mjs ./
 
+RUN echo "$GIT_SHA" > /app/.version
+RUN echo "$GIT_SHA" > /public/.version
 # Install deps
 RUN npm ci
 
