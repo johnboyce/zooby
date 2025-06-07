@@ -1,0 +1,38 @@
+name: Terraform Push
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'infra/**'
+      - 'Makefile'
+      - '.github/workflows/terraform-push.yml'
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials via GitHub OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::020157571320:role/zooby-github-actions-role
+          aws-region: us-east-1
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.8.3
+
+      - name: Terraform Init / Validate / Plan / Apply
+        run: |
+          make tf-init TERRAFORM_ENV=qa
+          make tf-validate TERRAFORM_ENV=qa
+          make tf-plan TERRAFORM_ENV=qa
+          make tf-apply TERRAFORM_ENV=qa
