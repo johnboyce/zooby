@@ -7,3 +7,8 @@ variable "role_name" {
   description = "Name of the IAM role for GitHub OIDC"
   type        = string
 }
+
+variable "repo_owner" {
+  description = "GitHub organization or user"
+  type        = string
+}

@@ -13,8 +13,6 @@ COPY next.config.ts ./
 COPY postcss.config.mjs ./
 COPY eslint.config.mjs ./
 
-RUN echo "$GIT_SHA" > /app/.version
-RUN echo "$GIT_SHA" > /public/.version
 # Install deps
 RUN npm ci
 

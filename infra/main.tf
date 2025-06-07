@@ -142,7 +142,8 @@ module "frontend_ecr" {
 
 module "github_oidc" {
   source = "./modules/github_oidc"
-  repo_name  = "johnboyce/zooby"
+  repo_name  = "zooby"
+  repo_owner = "johnboyce"
   role_name  = "zooby-github-actions-role"
 }
 
