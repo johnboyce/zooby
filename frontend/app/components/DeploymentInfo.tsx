@@ -2,14 +2,17 @@
 import { useEffect, useState, useCallback } from 'react';
 
 export default function DeploymentInfo() {
-  const [deployTime] = useState(() => new Date().toISOString());
   const [timeSince, setTimeSince] = useState<string>('');
   const [isDefault, setIsDefault] = useState(true);
+  const [gitSha, setGitSha] = useState<string | null>(null);
+  const [deployedAt, setDeployedAt] = useState<Date | null>(null);
 
   useEffect(() => {
-    fetch("deploy-meta.json")
+    fetch("/deploy-meta.json")
       .then(res => res.json())
-      .then(() => {
+      .then(data => {
+        if (data?.gitSha) setGitSha(data.gitSha);
+        if (data?.deployedAt) setDeployedAt(new Date(data.deployedAt));
         setIsDefault(false);
       })
       .catch(() => {
@@ -18,8 +21,10 @@ export default function DeploymentInfo() {
   }, []);
 
   const updateTimeSince = useCallback(() => {
+    if (!deployedAt) return;
+
     const now = new Date();
-    const diff = Math.floor((now.getTime() - new Date(deployTime).getTime()) / 1000);
+    const diff = Math.floor((now.getTime() - deployedAt.getTime()) / 1000);
 
     const days = Math.floor(diff / 86400);
     const hours = Math.floor((diff % 86400) / 3600);
@@ -27,7 +32,7 @@ export default function DeploymentInfo() {
     const seconds = diff % 60;
 
     setTimeSince(`${days}d ${hours}h ${minutes}m ${seconds}s`);
-  }, [deployTime]);
+  }, [deployedAt]);
 
   useEffect(() => {
     updateTimeSince();
@@ -37,7 +42,16 @@ export default function DeploymentInfo() {
 
   return (
     <div className={`text-sm ${isDefault ? 'text-red-400' : 'text-cyan-300/60'}`}>
-      <p>Deployed: {timeSince} ago{isDefault ? ' (estimated)' : ''}</p>
+      <p>
+        Deployed: {deployedAt?.toLocaleString() || 'unknown'}
+        {timeSince && ` (${timeSince} ago)`}
+        {isDefault ? ' (estimated)' : ''}
+      </p>
+      {gitSha && (
+        <p className="text-xs opacity-70">
+          Version: <code>{gitSha}</code>
+        </p>
+      )}
     </div>
   );
 }
