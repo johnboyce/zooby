@@ -39,11 +39,12 @@ jobs:
           echo "env AWS_REGION: ${{ env.AWS_REGION }}"
           echo "Role to assume: arn:aws:iam::${{ env.ACCOUNT_ID }}:role/zooby-github-actions-role"
 
-      - name: Configure AWS credentials via OIDC
+      - name: Assume AWS Role with OIDC
         uses: aws-actions/configure-aws-credentials@v4.0.2
         with:
-          role-to-assume: arn:aws:iam::${{ env.ACCOUNT_ID }}:role/zooby-github-actions-role
-          aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: arn:aws:iam::020157571320:role/zooby-github-actions-role
+          aws-region: us-east-1
+          role-session-name: github-actions
 
       - name: Ensure Docker & Make are available
         run: |
