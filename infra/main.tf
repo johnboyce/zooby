@@ -161,6 +161,7 @@ module "apprunner_qa" {
   env_vars = {
     NODE_ENV        = "production"
     NEXTAUTH_URL    = var.nextauth_url
-    NEXTAUTH_SECRET = "john"                          # 🔐 Use Terraform external ref if needed
+    NEXTAUTH_SECRET = "john"
+    OAUTH_CLIENT_SECRET = var.oauth_client_secret# 🔐 Use Terraform external ref if needed
   }
 }
