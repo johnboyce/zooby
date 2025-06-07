@@ -6,15 +6,16 @@ export default withAuth({
   },
   callbacks: {
     authorized: ({ token }) => {
-      // Only allow access if there's a valid session token
       return !!token;
     },
   },
 });
 
+// Only apply middleware to protected pages
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|api/auth).*)',
+    '/dashboard/:path*',
+    '/devices/:path*',
+    '/settings/:path*',
   ],
 };
-
