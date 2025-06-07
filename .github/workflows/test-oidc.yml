@@ -1,0 +1,36 @@
+name: OIDC Assume Role Test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  test-oidc:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Dump GitHub OIDC Context
+        run: |
+          echo "GITHUB_REPOSITORY=${GITHUB_REPOSITORY}"
+          echo "GITHUB_REF=${GITHUB_REF}"
+          echo "ACTOR=${GITHUB_ACTOR}"
+          echo "SHA=${GITHUB_SHA}"
+          echo "GITHUB_WORKFLOW=${GITHUB_WORKFLOW}"
+          echo "ACTIONS_ID_TOKEN_REQUEST_URL=${ACTIONS_ID_TOKEN_REQUEST_URL}"
+          echo "ACTIONS_ID_TOKEN_REQUEST_TOKEN=${ACTIONS_ID_TOKEN_REQUEST_TOKEN}"
+
+      - name: Assume AWS Role with OIDC
+        uses: aws-actions/configure-aws-credentials@v4.0.2
+        with:
+          role-to-assume: arn:aws:iam::020157571320:role/zooby-github-actions-role
+          aws-region: us-east-1
+          role-session-name: github-actions
+
+      - name: Verify AWS Identity
+        run: aws sts get-caller-identity
+
+      - name: Print Environment Info
+        run: env | sort
