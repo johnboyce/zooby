@@ -38,7 +38,6 @@ jobs:
           echo "env ACCOUNT_ID: ${{ env.ACCOUNT_ID }}"
           echo "env AWS_REGION: ${{ env.AWS_REGION }}"
           echo "Role to assume: arn:aws:iam::${{ env.ACCOUNT_ID }}:role/zooby-github-actions-role"
-          echo "GITHUB_CONTEXT: ${{ toJson(github) }}"
 
       - name: Configure AWS credentials via OIDC
         uses: aws-actions/configure-aws-credentials@v4.0.2

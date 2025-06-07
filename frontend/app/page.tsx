@@ -130,7 +130,7 @@ export default function Home() {
       </div>
       <footer className="mt-8 sm:mt-12 py-3 sm:py-4 border-t border-cyan-500/10 backdrop-blur-sm bg-black/20">
         <div className="max-w-6xl mx-auto px-2 sm:px-4 flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-0">
-          <p className="text-cyan-300/60 text-xs sm:text-base">&copy; {new Date().getFullYear()} Zooby Dashboard</p>
+          <p className="text-cyan-300/60 text-xs sm:text-base">&copy; {new Date().getFullYear()} Zooby International</p>
           <DeploymentInfo />
         </div>
       </footer>
