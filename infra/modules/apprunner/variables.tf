@@ -17,13 +17,13 @@ variable "port" {
 variable "cpu" {
   description = "CPU size for the App Runner instance"
   type        = string
-  default     = "1024"
+  default     = "256"
 }
 
 variable "memory" {
   description = "Memory size for the App Runner instance"
   type        = string
-  default     = "2048"
+  default     = "512"
 }
 
 variable "env_vars" {

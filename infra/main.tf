@@ -156,8 +156,8 @@ module "apprunner_qa" {
   aws_region       = var.aws_region
 
   port   = "3000"
-  cpu    = "1024"
-  memory = "2048"
+  cpu    = "256"   # 0.25 vCPU
+  memory = "512"   # 0.5 GB
 
   env_vars = {
     NODE_ENV        = "production"

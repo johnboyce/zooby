@@ -5,10 +5,6 @@ on:
     branches: [main]
     paths:
       - 'frontend/**'
-      - 'Dockerfile'
-      - 'Makefile'
-      - '.github/workflows/deploy-ui-qa.yml'
-
   workflow_dispatch:
 
 jobs:
