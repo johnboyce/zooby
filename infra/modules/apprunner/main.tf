@@ -45,6 +45,8 @@ resource "aws_apprunner_service" "frontend" {
     memory = var.memory
   }
 
+  auto_scaling_configuration_arn = aws_apprunner_auto_scaling_configuration_version.this.arn
+
   tags = {
     Environment = var.environment
   }
