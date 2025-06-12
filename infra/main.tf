@@ -16,6 +16,13 @@ provider "aws" {
   alias  = "default"
 }
 
+module "vpc" {
+  source               = "./modules/vpc"
+  name                 = "zooby-qa"
+  vpc_cidr             = "10.0.0.0/16"
+  public_subnet_cidrs  = ["10.0.1.0/24", "10.0.2.0/24"]
+}
+
 provider "aws" {
   alias                       = "localstack"
   region                      = "us-east-1"
@@ -235,4 +242,61 @@ module "apprunner_qa" {
     NEXTAUTH_SECRET = "john"
     OAUTH_CLIENT_SECRET = var.oauth_client_secret# 🔐 Use Terraform external ref if needed
   }
+}
+
+module "ecs_cluster" {
+  source = "./modules/ecs_cluster"
+  name   = var.cluster_name
+
+}
+
+module "zooby_backend" {
+  source = "./modules/ecs_service"
+
+  name               = "zooby-backend"
+  family             = "zooby-backend-task"
+  cpu                   = var.cpu
+  memory                = var.memory
+  environment_variables = var.environment_variables
+  cluster_arn        = module.ecs_cluster.arn
+  execution_role_arn = module.ecs_iam.execution_role_arn
+  task_role_arn      = module.ecs_iam.task_role_arn
+  target_group_arn   = module.alb.zooby_backend_target_group_arn
+
+  image_url          = "020157571320.dkr.ecr.us-east-1.amazonaws.com/zooby-backend:qa"
+  app_container_name = "zooby-backend"
+  container_port     = 8080
+
+  subnet_ids         = module.vpc.public_subnet_ids
+  security_group_ids = [module.alb.security_group_id]
+
+  desired_count      = 1
+  include_sidecar    = true
+
+}
+
+
+module "ecs_iam" {
+  source       = "./modules/ecs_iam"
+  name_prefix  = "zooby-backend"
+
+  task_permissions = [
+    {
+      Effect   = "Allow"
+      Action   = ["dynamodb:GetItem", "dynamodb:PutItem"]
+      Resource = ["arn:aws:dynamodb:us-east-1:020157571320:table/zooby-*"]
+    },
+    {
+      Effect   = "Allow"
+      Action   = ["sqs:SendMessage"]
+      Resource = ["arn:aws:sqs:us-east-1:020157571320:zooby-*"]
+    }
+  ]
+}
+
+module "alb" {
+  source = "./modules/alb"
+
+  vpc_id            = module.vpc.vpc_id
+  public_subnet_ids = module.vpc.public_subnet_ids
 }

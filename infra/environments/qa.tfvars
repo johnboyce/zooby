@@ -12,3 +12,12 @@ frontend_service_name    = "zooby-frontend-qa"
 
 nextauth_url = "https://7qdnizqzpi.us-east-1.awsapprunner.com"
 oauth_client_secret = "tgpY40U6Ozuf804U/g8oMQORh4fPDWdRiPXN2hLrSKw="
+
+cluster_name = "zooby-qa-cluster"
+cpu          = "512"
+memory       = "1024"
+
+environment_variables = [
+  { name = "STAGE", value = "qa" },
+  { name = "LOG_LEVEL", value = "debug" }
+]

@@ -58,3 +58,7 @@ output "frontend_ecr_repo_name" {
 output "backend_ecr_repo_name" {
   value = module.backend_ecr.repository_name
 }
+
+output "alb_dns_name" {
+  value = module.alb.alb_dns_name
+}

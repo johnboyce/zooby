@@ -46,6 +46,7 @@ BACKEND_ECR_URI := $(ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(BACKEND_I
 build-backend-docker: native ## Build Docker image for native Quarkus
 	docker build -t $(BACKEND_ECR_URI):latest \
 		-t $(BACKEND_ECR_URI):$(GIT_SHA) \
+		-t $(BACKEND_ECR_URI):qaq \
 		-f backend/Dockerfile.native backend
 
 push-backend-docker: login-ecr ## Push backend image with latest and short SHA
