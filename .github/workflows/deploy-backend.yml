@@ -9,13 +9,15 @@ on:
       - 'Makefile'
       - '.github/workflows/deploy-backend.yml'
 
-  workflow_dispatch:  # Enables manual deploy
+  workflow_dispatch:  # Allow manual deployments
 
 env:
   AWS_REGION: us-east-1
-  BACKEND_IMAGE_NAME: zooby-backend
   ACCOUNT_ID: 020157571320
+  BACKEND_IMAGE_NAME: zooby-backend
   BACKEND_ECR_URI: 020157571320.dkr.ecr.us-east-1.amazonaws.com/zooby-backend
+  ECS_CLUSTER: zooby-qa-cluster
+  ECS_SERVICE: zooby-backend
 
 jobs:
   deploy-backend:
@@ -40,6 +42,13 @@ jobs:
       - name: Set short Git SHA
         run: echo "GIT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::020157571320:role/zooby-github-actions-role
+          role-session-name: zoobyBackendDeploy
+          aws-region: ${{ env.AWS_REGION }}
+
       - name: Login to Amazon ECR
         run: |
           aws ecr get-login-password --region $AWS_REGION | \
@@ -57,11 +66,11 @@ jobs:
       - name: Force ECS service update
         run: |
           aws ecs update-service \
-            --cluster zooby-qa-cluster \
-            --service zooby-backend \
+            --cluster $ECS_CLUSTER \
+            --service $ECS_SERVICE \
             --force-new-deployment \
             --region $AWS_REGION
 
       - name: Print deployed version
         run: |
-          echo "✅ Backend deployed: $GIT_SHA"
+          echo "✅ Backend deployed version: $GIT_SHA"
