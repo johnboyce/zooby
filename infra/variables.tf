@@ -57,3 +57,26 @@ variable "oauth_client_secret" {
   description = "OAuth client secret used by NextAuth"
   type        = string
 }
+
+variable "cpu" {
+  type    = string
+  default = "512"
+}
+
+variable "memory" {
+  type    = string
+  default = "1024"
+}
+
+variable "environment_variables" {
+  type = list(object({
+    name  = string
+    value = string
+  }))
+  default = []
+}
+
+variable "cluster_name" {
+  type        = string
+  description = "ECS cluster name"
+}

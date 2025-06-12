@@ -1,0 +1,67 @@
+name: Deploy Backend to QA
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'backend/**'
+      - 'Makefile'
+      - '.github/workflows/deploy-backend.yml'
+
+  workflow_dispatch:  # Enables manual deploy
+
+env:
+  AWS_REGION: us-east-1
+  BACKEND_IMAGE_NAME: zooby-backend
+  ACCOUNT_ID: 020157571320
+  BACKEND_ECR_URI: 020157571320.dkr.ecr.us-east-1.amazonaws.com/zooby-backend
+
+jobs:
+  deploy-backend:
+    name: Build, Push, and Deploy Backend
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up GraalVM for Java 21
+        uses: graalvm/setup-graalvm@v1
+        with:
+          version: '21.0.2'
+          java-version: '21'
+          distribution: 'graalvm-community'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Confirm Java version
+        run: java -version
+
+      - name: Set short Git SHA
+        run: echo "GIT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: Login to Amazon ECR
+        run: |
+          aws ecr get-login-password --region $AWS_REGION | \
+          docker login --username AWS --password-stdin $BACKEND_ECR_URI
+
+      - name: Build native image
+        run: make native
+
+      - name: Build backend Docker image
+        run: make build-backend-docker
+
+      - name: Push backend Docker image
+        run: make push-backend-image
+
+      - name: Force ECS service update
+        run: |
+          aws ecs update-service \
+            --cluster zooby-qa-cluster \
+            --service zooby-backend \
+            --force-new-deployment \
+            --region $AWS_REGION
+
+      - name: Print deployed version
+        run: |
+          echo "✅ Backend deployed: $GIT_SHA"
