@@ -134,6 +134,71 @@ module "inventory_table_aws" {
   tags = local.common_tags
 }
 
+module "users_table_aws" {
+  source      = "./modules/dynamodb"
+  table_name  = var.zooby_users_table_name
+  environment = var.environment
+  providers   = { aws = aws.default }
+  count       = var.use_localstack ? 0 : 1
+  hash_key    = "user_id"
+  attributes = [
+    {
+      name = "user_id"
+      type = "S"
+    },
+    {
+      name = "provider"
+      type = "S"
+    },
+    {
+      name = "provider_id"
+      type = "S"
+    }
+  ]
+  global_secondary_indexes = [
+    {
+      name            = "provider-provider_id-index"
+      hash_key        = "provider"
+      range_key       = "provider_id"
+      projection_type = "ALL"
+    }
+  ]
+  tags = local.common_tags
+}
+
+module "users_table_local" {
+  source      = "./modules/dynamodb"
+  table_name  = var.zooby_users_table_name
+  environment = var.environment
+  providers   = { aws = aws.localstack }
+  count       = var.use_localstack ? 1 : 0
+  hash_key    = "user_id"
+  attributes = [
+    {
+      name = "user_id"
+      type = "S"
+    },
+    {
+      name = "provider"
+      type = "S"
+    },
+    {
+      name = "provider_id"
+      type = "S"
+    }
+  ]
+  global_secondary_indexes = [
+    {
+      name            = "provider-provider_id-index"
+      hash_key        = "provider"
+      range_key       = "provider_id"
+      projection_type = "ALL"
+    }
+  ]
+  tags = local.common_tags
+}
+
+
 module "frontend_ecr" {
   source      = "./modules/ecr"
   repo_name   = "zooby-frontend"

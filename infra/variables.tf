@@ -27,6 +27,13 @@ variable "zooby_inventory_table_name" {
   description = "Name of the DynamoDB inventory table"
 }
 
+variable "zooby_users_table_name" {
+  description = "DynamoDB table name for OAuth users"
+  type        = string
+  default     = "zooby-qa-users"
+}
+
+
 variable "sqs_queue_name" {
   type        = string
   description = "Name of the SQS queue"
