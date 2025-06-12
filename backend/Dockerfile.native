@@ -1,0 +1,4 @@
+FROM quay.io/quarkus/quarkus-micro-image:2.2
+WORKDIR /work/
+COPY target/zooby-backend-1.0.0-runner /work/application
+ENTRYPOINT ["/work/application"]

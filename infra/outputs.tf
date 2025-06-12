@@ -42,3 +42,19 @@ output "apprunner_qa_service_arn" {
   value       = module.apprunner_qa.service_arn
   description = "QA App Runner service ARN"
 }
+
+output "frontend_ecr_repo_url" {
+  value = module.frontend_ecr.repository_url
+}
+
+output "backend_ecr_repo_url" {
+  value = module.backend_ecr.repository_url
+}
+
+output "frontend_ecr_repo_name" {
+  value = module.frontend_ecr.repository_name
+}
+
+output "backend_ecr_repo_name" {
+  value = module.backend_ecr.repository_name
+}

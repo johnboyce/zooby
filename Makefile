@@ -40,6 +40,21 @@ native: ## Build native image
 native-run: ## Run native binary
 	cd backend && ./target/zooby-backend-1.0.0-runner
 
+BACKEND_IMAGE_NAME := zooby-backend
+BACKEND_ECR_URI := $(ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(BACKEND_IMAGE_NAME)
+
+build-backend-docker: native ## Build Docker image for native Quarkus
+	docker build -t $(BACKEND_ECR_URI):latest \
+		-t $(BACKEND_ECR_URI):$(GIT_SHA) \
+		-f backend/Dockerfile.native backend
+
+push-backend-docker: login-ecr ## Push backend image with latest and short SHA
+	docker push $(BACKEND_ECR_URI):latest
+	docker push $(BACKEND_ECR_URI):$(GIT_SHA)
+
+deploy-backend-ecr: build-backend-docker push-backend-docker ## Build and push backend
+	@echo "✅ Backend image deployed: $(GIT_SHA)"
+
 # ======================
 # Frontend Targets
 # ======================
@@ -120,7 +135,8 @@ ECR_URI          := $(ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(IMAGE_NA
 GIT_SHA          := $(shell git rev-parse --short HEAD)
 TAG              := $(GIT_SHA)
 SERVICE_ARN      := arn:aws:apprunner:$(AWS_REGION):$(ACCOUNT_ID):service/zooby-frontend-qa/3dd179a234f74a128c01728dba6aeda7
-
+BACKEND_IMAGE_NAME := zooby-backend
+BACKEND_ECR_URI    := 020157571320.dkr.ecr.us-east-1.amazonaws.com/$(BACKEND_IMAGE_NAME)
 # ----------- TARGETS -----------
 
 deploy-qa-ui: push-image trigger-apprunner print-version
@@ -149,6 +165,20 @@ trigger-apprunner:
 
 print-version:
 	@echo "✅ Deployed version: $(TAG)"
+
+deploy-qa-backend: push-backend-image print-backend-version
+
+push-backend-image: build-backend-docker login-ecr
+	docker tag zooby-backend:latest $(BACKEND_ECR_URI):$(TAG)
+	docker tag zooby-backend:latest $(BACKEND_ECR_URI):qa
+	docker tag zooby-backend:latest $(BACKEND_ECR_URI):latest
+	docker push $(BACKEND_ECR_URI):$(TAG)
+	docker push $(BACKEND_ECR_URI):qa
+	docker push $(BACKEND_ECR_URI):latest
+
+print-backend-version:
+	@echo "✅ Backend deployed version: $(TAG)"
+
 
 # ======================
 # JWT Generation
