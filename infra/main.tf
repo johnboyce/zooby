@@ -198,10 +198,15 @@ module "users_table_local" {
   tags = local.common_tags
 }
 
-
 module "frontend_ecr" {
   source      = "./modules/ecr"
   repo_name   = "zooby-frontend"
+  environment = var.environment
+}
+
+module "backend_ecr" {
+  source      = "./modules/ecr"
+  repo_name   = "zooby-backend"
   environment = var.environment
 }
 
