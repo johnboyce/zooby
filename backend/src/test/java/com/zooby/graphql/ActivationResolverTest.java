@@ -3,7 +3,7 @@ package com.zooby.graphql;
 import com.zooby.repository.DynamoDBService;
 import com.zooby.model.ActivationStatus;
 import io.quarkus.test.junit.QuarkusTest;
-import io.quarkus.test.junit.mockito.InjectMock;
+import io.quarkus.test.InjectMock;
 import io.quarkus.test.security.TestSecurity;
 import io.restassured.RestAssured;
 import io.restassured.filter.log.RequestLoggingFilter;
