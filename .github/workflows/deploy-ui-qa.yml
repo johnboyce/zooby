@@ -39,8 +39,8 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4.0.2
         with:
           role-to-assume: arn:aws:iam::020157571320:role/zooby-github-actions-role
-          aws-region: us-east-1
           role-session-name: github-actions
+          aws-region: ${{ env.AWS_REGION }}"
 
       - name: Install Docker and Make
         run: |
