@@ -135,10 +135,11 @@ public class DynamoDbSeeder {
         }
     }
 
-    private <T> TableData<T> loadJsonResource(String path, Class<? extends TableData<T>> type) {
+    @SuppressWarnings("unchecked")
+    private <T> TableData<T> loadJsonResource(String path, Class<?> rawType) {
         try (InputStream is = getClass().getResourceAsStream(path)) {
             if (is == null) throw new RuntimeException("❌ Resource not found: " + path);
-            return JsonbBuilder.create().fromJson(is, type);
+            return (TableData<T>) JsonbBuilder.create().fromJson(is, rawType);
         } catch (Exception e) {
             throw new RuntimeException("❌ Failed to load or parse resource: " + path, e);
         }
