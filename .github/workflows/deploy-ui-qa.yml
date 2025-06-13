@@ -12,10 +12,6 @@ jobs:
     name: Build & Deploy Frontend to QA
     runs-on: ubuntu-latest
 
-    permissions:
-      id-token: write
-      contents: read
-
     env:
       AWS_REGION: us-east-1
       ACCOUNT_ID: 020157571320
@@ -24,23 +20,12 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: Dump GitHub OIDC context
-        run: |
-          echo "GITHUB_REPOSITORY=${GITHUB_REPOSITORY}"
-          echo "GITHUB_REF=${GITHUB_REF}"
-          echo "ACTOR: $GITHUB_ACTOR"
-          echo "SHA: $GITHUB_SHA"
-          echo "GITHUB_WORKFLOW: $GITHUB_WORKFLOW"
-          echo "env ACCOUNT_ID: ${{ env.ACCOUNT_ID }}"
-          echo "env AWS_REGION: ${{ env.AWS_REGION }}"
-          echo "Role to assume: arn:aws:iam::${{ env.ACCOUNT_ID }}:role/zooby-github-actions-role"
-
-      - name: Assume AWS Role with OIDC
-        uses: aws-actions/configure-aws-credentials@v4.0.2
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::020157571320:role/zooby-github-actions-role
-          aws-region: us-east-1
-          role-session-name: github-actions
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Install Docker and Make
         run: |
