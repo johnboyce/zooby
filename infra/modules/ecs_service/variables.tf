@@ -28,3 +28,15 @@ variable "target_group_arn" {
   type        = string
   default     = null
 }
+
+variable "log_group" {
+  type        = string
+  description = "CloudWatch Logs group for ECS container logs"
+  default     = "/ecs/zooby-backend"
+}
+
+variable "aws_region" {
+  type        = string
+  description = "AWS region"
+  default     = "us-east-1"
+}

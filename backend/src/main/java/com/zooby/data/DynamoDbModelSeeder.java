@@ -33,7 +33,7 @@ public class DynamoDbModelSeeder {
         try {
             TableData tableData = loadJsonResource("/schema/models.json", TableData.class);
 
-            if (!activeProfile.equals("prod")) {
+            if (!activeProfile.equals("prod") || !activeProfile.equals("qa")) {
                 createTableIfNotExists(tableData);
                 waitForTableActive();
             }

@@ -17,14 +17,27 @@ resource "aws_ecs_task_definition" "this" {
           protocol      = "tcp"
         }
       ],
-      environment = var.environment_variables
+      environment = var.environment_variables,
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          awslogs-group         = var.log_group
+          awslogs-region        = var.aws_region
+          awslogs-stream-prefix = var.app_container_name
+        }
+      }
     },
-    var.include_sidecar ? {
-      name  = "otel-sidecar"
-      image = var.sidecar_image
+      var.include_sidecar ? {
+      name      = "otel-sidecar"
+      image     = var.sidecar_image
       essential = false
     } : null
   ])
+}
+
+resource "aws_cloudwatch_log_group" "this" {
+  name              = var.log_group
+  retention_in_days = 7
 }
 
 resource "aws_ecs_service" "this" {

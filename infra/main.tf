@@ -269,6 +269,7 @@ module "zooby_backend" {
 
   subnet_ids         = module.vpc.public_subnet_ids
   security_group_ids = [module.alb.security_group_id]
+  aws_region         = var.aws_region
 
   desired_count      = 1
   include_sidecar    = true

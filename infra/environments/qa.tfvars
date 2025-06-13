@@ -19,5 +19,6 @@ memory       = "1024"
 
 environment_variables = [
   { name = "STAGE", value = "qa" },
+  { name = "QUARKUS_PROFILE", value = "qa" },
   { name = "LOG_LEVEL", value = "debug" }
 ]
