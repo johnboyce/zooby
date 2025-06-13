@@ -1,4 +1,4 @@
-FROM quay.io/quarkus/quarkus-micro-image:3.8
+FROM registry.access.redhat.com/ubi9/ubi-minimal:latest
 WORKDIR /work/
 COPY target/zooby-backend-1.0.0-runner /work/application
 ENTRYPOINT ["/work/application"]

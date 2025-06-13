@@ -13,7 +13,7 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  ACCOUNT_ID: 020157571320
+  ACCOUNT_ID: "020157571320"
   BACKEND_IMAGE_NAME: zooby-backend
   BACKEND_ECR_URI: 020157571320.dkr.ecr.us-east-1.amazonaws.com/zooby-backend
   ECS_CLUSTER: zooby-qa-cluster
@@ -24,9 +24,13 @@ jobs:
     name: Build, Push, and Deploy Backend
     runs-on: ubuntu-latest
 
+    permissions:
+      id-token: write  # Needed for OIDC
+      contents: read
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up GraalVM for Java 21
         uses: graalvm/setup-graalvm@v1
@@ -42,12 +46,20 @@ jobs:
       - name: Set short Git SHA
         run: echo "GIT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
+      - name: Dump OIDC Token Context
+        run: |
+          echo "OIDC URL: $ACTIONS_ID_TOKEN_REQUEST_URL"
+          echo "Token present? ${ACTIONS_ID_TOKEN_REQUEST_TOKEN:+yes}"
+
       - name: Configure AWS credentials via OIDC
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4.0.2
         with:
-          role-to-assume: arn:aws:iam::020157571320:role/zooby-github-actions-role
+          role-to-assume: arn:aws:iam::${{ env.ACCOUNT_ID }}:role/zooby-github-actions-role
           role-session-name: zoobyBackendDeploy
           aws-region: ${{ env.AWS_REGION }}
+
+      - name: Verify AWS Identity
+        run: aws sts get-caller-identity
 
       - name: Login to Amazon ECR
         run: |

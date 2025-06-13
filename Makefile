@@ -35,7 +35,9 @@ dev: ## Run Quarkus in dev mode
 	cd backend && ./mvnw quarkus:dev
 
 native: ## Build native image
-	cd backend && ./mvnw clean package -Pnative
+	cd backend && ./mvnw clean package -Pnative \
+		-Dquarkus.native.container-build=true \
+		-Dquarkus.native.target=linux-x86_64
 
 native-run: ## Run native binary
 	cd backend && ./target/zooby-backend-1.0.0-runner
@@ -46,11 +48,12 @@ BACKEND_ECR_URI := $(ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com/$(BACKEND_I
 build-backend-docker: native ## Build Docker image for native Quarkus
 	docker build -t $(BACKEND_ECR_URI):latest \
 		-t $(BACKEND_ECR_URI):$(GIT_SHA) \
-		-t $(BACKEND_ECR_URI):qaq \
+		-t $(BACKEND_ECR_URI):qa \
 		-f backend/Dockerfile.native backend
 
 push-backend-docker: login-ecr ## Push backend image with latest and short SHA
 	docker push $(BACKEND_ECR_URI):latest
+	docker push $(BACKEND_ECR_URI):qa
 	docker push $(BACKEND_ECR_URI):$(GIT_SHA)
 
 deploy-backend-ecr: build-backend-docker push-backend-docker ## Build and push backend
