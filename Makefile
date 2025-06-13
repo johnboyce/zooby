@@ -48,6 +48,9 @@ test: ## Run backend tests
 dev: ## Run Quarkus in dev mode
 	cd backend && ./mvnw quarkus:dev
 
+qa: ## Run Quarkus in dev mode
+	cd backend && ./mvnw quarkus:dev -Dquarkus.profile=qa
+
 native: ## Build native image
 	cd backend && ./mvnw clean package -Pnative \
 		-Dquarkus.native.container-build=true \
