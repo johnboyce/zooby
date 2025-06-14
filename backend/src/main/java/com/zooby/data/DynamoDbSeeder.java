@@ -58,7 +58,7 @@ public class DynamoDbSeeder {
     private void seedModels() {
         try {
 
-            TableData<ModelItem> tableData = loadJsonResource("/schema/models.json", new TypeReference<>() {});
+            TableData<ModelItem> tableData = loadJsonResource("schema/models.json", new TypeReference<>() {});
             createTableIfNotExists(modelsTableName, tableData);
             waitForTableActive(modelsTableName);
 
@@ -86,7 +86,7 @@ public class DynamoDbSeeder {
 
     private void seedInventory() {
         try {
-            TableData<InventoryItem> tableData = loadJsonResource("/schema/inventory.json", new TypeReference<>() {});
+            TableData<InventoryItem> tableData = loadJsonResource("schema/inventory.json", new TypeReference<>() {});
             createTableIfNotExists(inventoryTableName, tableData);
             waitForTableActive(inventoryTableName);
 
