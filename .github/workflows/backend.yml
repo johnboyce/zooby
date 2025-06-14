@@ -16,6 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Test (Makefile)
 
+    env:
+      QUARKUS_PROFILE: qa  # ✅ This ensures Quarkus uses the 'qa' profile if supported
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -34,7 +37,7 @@ jobs:
       - name: Make wrapper executable
         run: chmod +x backend/mvnw
 
-      - name: Build backend
+      - name: Build backend with QA profile
         run: make build
 
       - name: Run tests

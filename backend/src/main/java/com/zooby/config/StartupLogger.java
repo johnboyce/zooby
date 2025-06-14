@@ -25,9 +25,10 @@ public class StartupLogger {
     String credentialsType;
 
     @PostConstruct
-    void logSettings() {
-        LOG.info("🔍 Startup settings logged at " + java.time.Instant.now());
+    void startupLogger() {
+        LOG.info("🚀 Zooby backend started successfully");
         LOG.info("🚀 Starting with profile: " + profile);
+        LOG.info("🔍 Startup settings logged at " + java.time.Instant.now());
         LOG.info("📦 Models Table: " + modelsTable);
         LOG.info("📦 Inventory Table: " + inventoryTable);
         LOG.info("🔐 Credentials Type: " + credentialsType);

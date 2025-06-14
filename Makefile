@@ -7,6 +7,7 @@ AWS_REGION           := us-east-1
 ACCOUNT_ID           := 020157571320
 GIT_SHA              := $(shell git rev-parse --short HEAD)
 TAG                  := $(GIT_SHA)
+QUARKUS_PROFILE      ?= qa
 
 # Frontend
 FRONTEND_IMAGE_NAME  := zooby-frontend
@@ -40,21 +41,22 @@ up: ## Start local services using Docker Compose
 	docker-compose up -d
 
 build: ## Build the backend project
-	cd backend && ./mvnw clean package
+	cd backend && ./mvnw clean package -Dquarkus.profile=$(QUARKUS_PROFILE)
 
 test: ## Run backend tests
-	cd backend && ./mvnw test
+	cd backend && ./mvnw test -Dquarkus.profile=$(QUARKUS_PROFILE)
 
 dev: ## Run Quarkus in dev mode
 	cd backend && ./mvnw quarkus:dev
 
-qa: ## Run Quarkus in dev mode
+qa: ## Run Quarkus in QA profile dev mode
 	cd backend && ./mvnw quarkus:dev -Dquarkus.profile=qa
 
-native: ## Build native image
+native: ## Build native image using QA profile
 	cd backend && ./mvnw clean package -Pnative \
 		-Dquarkus.native.container-build=true \
-		-Dquarkus.native.target=linux-x86_64
+		-Dquarkus.native.target=linux-x86_64 \
+		-Dquarkus.profile=$(QUARKUS_PROFILE)
 
 native-run: ## Run native binary
 	cd backend && ./target/zooby-backend-1.0.0-runner
@@ -63,7 +65,7 @@ build-backend-docker: native ## Build Docker image for native Quarkus
 	docker build -t $(BACKEND_IMAGE_NAME):latest \
 		-f backend/Dockerfile.native backend
 
-tag-backend-image:
+tag-backend-image: ## Tag backend image for ECR
 	docker tag $(BACKEND_IMAGE_NAME):latest $(BACKEND_ECR_URI):$(TAG)
 	docker tag $(BACKEND_IMAGE_NAME):latest $(BACKEND_ECR_URI):qa
 	docker tag $(BACKEND_IMAGE_NAME):latest $(BACKEND_ECR_URI):latest
@@ -73,7 +75,7 @@ push-backend-image: login-ecr tag-backend-image ## Push backend image with tags
 	docker push $(BACKEND_ECR_URI):qa
 	docker push $(BACKEND_ECR_URI):latest
 
-deploy-backend-ecr: build-backend-docker push-backend-image print-backend-version ## Full deploy
+deploy-backend-ecr: build-backend-docker push-backend-image print-backend-version ## Full backend ECR deploy
 
 print-backend-version:
 	@echo "✅ Backend deployed version: $(TAG)"
@@ -81,13 +83,11 @@ print-backend-version:
 # ======================
 # Frontend Targets
 # ======================
-.PHONY: frontend
 frontend: ## Install deps and build frontend
 	cd frontend && npm ci && npm run build
 
 frontend-time:
 	echo '{"deployedAt": "'$(shell date -u '+%Y-%m-%dT%H:%M:%SZ')'"}' > frontend/public/deploy-meta.json
-	@echo "Frontend deployment time updated."
 
 frontend-dev: frontend-time ## Start frontend dev server
 	cd frontend && npm run dev
@@ -97,8 +97,7 @@ deploy-ui: frontend ## Deploy frontend to GitHub Pages
 	cd frontend && touch out/.nojekyll
 	cd frontend && git add out/ && git commit -m "Deploy to GitHub Pages" || true
 	cd frontend && git subtree push --prefix out origin gh-pages || \
-	(git push origin `git subtree split --prefix out HEAD`:gh-pages --force && \
-	echo "Deployed to GitHub Pages")
+	(git push origin `git subtree split --prefix out HEAD`:gh-pages --force)
 
 lint: ## Lint frontend code
 	cd frontend && npm ci && npm run lint
@@ -183,7 +182,6 @@ run-backend:
 # ======================
 # JWT Generation
 # ======================
-# Usage: make jwt ARGS="<userId> <role> <account> [capability1 capability2 ...]"
 jwt:
 	@cd backend && ./mvnw -q compile exec:java \
 		-Dsmallrye.jwt.sign.key.location=src/main/resources/keys/privateKey.pem \
@@ -197,4 +195,10 @@ help: ## Show this help menu
 	@echo "Available targets:"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-20s %s\n", $$1, $$2}'
 
-.PHONY: all check check-core up build test dev native native-run frontend frontend-time frontend-dev deploy-ui lint tf-init tf-validate tf-plan tf-apply tf-destroy infra-bootstrap dev-full infra-local seed-localstack run-backend jwt help tf-workspace tf-output build-backend-docker push-backend-image tag-backend-image deploy-backend-ecr
+.PHONY: all check check-core up build test dev native native-run \
+	build-backend-docker push-backend-image tag-backend-image deploy-backend-ecr \
+	frontend frontend-time frontend-dev deploy-ui lint \
+	tf-init tf-validate tf-plan tf-apply tf-destroy infra-bootstrap \
+	dev-full infra-local seed-localstack run-backend seed-qa seed-prod \
+	login-ecr push-image trigger-apprunner print-version \
+	jwt help tf-workspace tf-output
