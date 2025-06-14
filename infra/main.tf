@@ -268,7 +268,7 @@ module "zooby_backend" {
   container_port     = 8080
 
   subnet_ids         = module.vpc.public_subnet_ids
-  security_group_ids = [module.alb.security_group_id]
+  security_group_ids  = [module.alb.security_group_id, module.ecs_cluster.fargate_sg_id]
   aws_region         = var.aws_region
 
   desired_count      = 1
