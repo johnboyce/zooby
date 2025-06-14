@@ -1,11 +1,13 @@
 package com.zooby.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.quarkus.runtime.Startup;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.json.bind.JsonbBuilder;
-import jakarta.json.bind.annotation.JsonbProperty;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
@@ -20,6 +22,7 @@ import java.util.Map;
 public class DynamoDbSeeder {
 
     private static final Logger LOG = Logger.getLogger(DynamoDbSeeder.class);
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     @Inject
     DynamoDbClient dynamoDb;
@@ -52,27 +55,27 @@ public class DynamoDbSeeder {
         seedInventory();
     }
 
-
     private void seedModels() {
         try {
-            TableData<ModelItem> tableData = loadJsonResource("/schema/models.json", TableData.class);
+
+            TableData<ModelItem> tableData = loadJsonResource("/schema/models.json", new TypeReference<>() {});
             createTableIfNotExists(modelsTableName, tableData);
             waitForTableActive(modelsTableName);
 
-            for (ModelItem item : tableData.getItems()) {
+            for (ModelItem item : tableData.items) {
                 try {
                     dynamoDb.putItem(PutItemRequest.builder()
-                        .tableName(modelsTableName)
-                        .item(Map.of(
-                            "model", AttributeValue.builder().s(item.getModel()).build(),
-                            "name", AttributeValue.builder().s(item.getName()).build(),
-                            "features", AttributeValue.builder().ss(item.getFeatures()).build(),
-                            "image", AttributeValue.builder().s(item.getImage()).build(),
-                            "description", AttributeValue.builder().s(item.getDescription()).build()
-                        ))
-                        .build());
+                            .tableName(modelsTableName)
+                            .item(Map.of(
+                                    "model", AttributeValue.fromS(item.model),
+                                    "name", AttributeValue.fromS(item.name),
+                                    "features", AttributeValue.fromSs(item.features),
+                                    "image", AttributeValue.fromS(item.image),
+                                    "description", AttributeValue.fromS(item.description)
+                            ))
+                            .build());
                 } catch (Exception e) {
-                    LOG.error("❌ Failed to insert model: " + item.getModel(), e);
+                    LOG.error("❌ Failed to insert model: " + item.model, e);
                 }
             }
             LOG.info("✅ Finished seeding models");
@@ -83,23 +86,23 @@ public class DynamoDbSeeder {
 
     private void seedInventory() {
         try {
-            TableData<InventoryItem> tableData = loadJsonResource("/schema/inventory.json", TableData.class);
+            TableData<InventoryItem> tableData = loadJsonResource("/schema/inventory.json", new TypeReference<>() {});
             createTableIfNotExists(inventoryTableName, tableData);
             waitForTableActive(inventoryTableName);
 
-            for (InventoryItem item : tableData.getItems()) {
+            for (InventoryItem item : tableData.items) {
                 try {
                     dynamoDb.putItem(PutItemRequest.builder()
-                        .tableName(inventoryTableName)
-                        .item(Map.of(
-                            "serial_number", AttributeValue.builder().s(item.getSerialNumber()).build(),
-                            "mac_address", AttributeValue.builder().s(item.getMacAddress()).build(),
-                            "model", AttributeValue.builder().s(item.getModel()).build(),
-                            "added_at", AttributeValue.builder().s(item.getAddedAt()).build()
-                        ))
-                        .build());
+                            .tableName(inventoryTableName)
+                            .item(Map.of(
+                                    "serial_number", AttributeValue.fromS(item.serialNumber),
+                                    "mac_address", AttributeValue.fromS(item.macAddress),
+                                    "model", AttributeValue.fromS(item.model),
+                                    "added_at", AttributeValue.fromS(item.addedAt)
+                            ))
+                            .build());
                 } catch (Exception e) {
-                    LOG.error("❌ Failed to insert inventory: " + item.getSerialNumber(), e);
+                    LOG.error("❌ Failed to insert inventory: " + item.serialNumber, e);
                 }
             }
             LOG.info("✅ Finished seeding inventory");
@@ -113,11 +116,11 @@ public class DynamoDbSeeder {
             dynamoDb.describeTable(r -> r.tableName(tableName));
         } catch (ResourceNotFoundException e) {
             dynamoDb.createTable(CreateTableRequest.builder()
-                .tableName(tableName)
-                .keySchema(tableData.getKeySchema())
-                .attributeDefinitions(tableData.getAttributeDefinitions())
-                .billingMode(BillingMode.PAY_PER_REQUEST)
-                .build());
+                    .tableName(tableName)
+                    .keySchema(tableData.getKeySchemaElements())
+                    .attributeDefinitions(tableData.getAttributeDefinitions())
+                    .billingMode(BillingMode.PAY_PER_REQUEST)
+                    .build());
         }
     }
 
@@ -135,96 +138,74 @@ public class DynamoDbSeeder {
         }
     }
 
-    @SuppressWarnings("unchecked")
-    private <T> TableData<T> loadJsonResource(String path, Class<?> rawType) {
-        try (InputStream is = getClass().getResourceAsStream(path)) {
+    private <T> TableData<T> loadJsonResource(String path, TypeReference<TableData<T>> typeRef) {
+        try (InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(path)) {
             if (is == null) throw new RuntimeException("❌ Resource not found: " + path);
-            return (TableData<T>) JsonbBuilder.create().fromJson(is, rawType);
+            return MAPPER.readValue(is, typeRef);
         } catch (Exception e) {
             throw new RuntimeException("❌ Failed to load or parse resource: " + path, e);
         }
     }
 
-    // === Shared Classes ===
-
+    // === Data Classes ===
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class TableData<T> {
-        @JsonbProperty("KeySchema")
-        List<KeySchemaWrapper> keySchema;
+        @JsonProperty("KeySchema")
+        public List<KeySchemaWrapper> keySchema;
 
-        @JsonbProperty("AttributeDefinitions")
-        List<AttributeDefinitionWrapper> attributeDefinitions;
+        @JsonProperty("AttributeDefinitions")
+        public List<AttributeDefinitionWrapper> attributeDefinitions;
 
-        @JsonbProperty("Items")
-        List<T> items;
+        @JsonProperty("Items")
+        public List<T> items;
 
-        public List<KeySchemaElement> getKeySchema() {
+        public List<KeySchemaElement> getKeySchemaElements() {
             return keySchema.stream()
-                .map(k -> KeySchemaElement.builder()
-                    .attributeName(k.getAttributeName())
-                    .keyType(k.getKeyType())
-                    .build())
-                .toList();
+                    .map(k -> KeySchemaElement.builder()
+                            .attributeName(k.attributeName)
+                            .keyType(KeyType.fromValue(k.keyType))
+                            .build())
+                    .toList();
         }
 
         public List<AttributeDefinition> getAttributeDefinitions() {
             return attributeDefinitions.stream()
-                .map(a -> AttributeDefinition.builder()
-                    .attributeName(a.getAttributeName())
-                    .attributeType(a.getAttributeType())
-                    .build())
-                .toList();
-        }
-
-        public List<T> getItems() {
-            return items;
+                    .map(a -> AttributeDefinition.builder()
+                            .attributeName(a.attributeName)
+                            .attributeType(ScalarAttributeType.fromValue(a.attributeType))
+                            .build())
+                    .toList();
         }
     }
 
     public static class KeySchemaWrapper {
-        @JsonbProperty("AttributeName")
-        String attributeName;
+        @JsonProperty("AttributeName")
+        public String attributeName;
 
-        @JsonbProperty("KeyType")
-        String keyType;
-
-        public String getAttributeName() { return attributeName; }
-        public KeyType getKeyType() { return KeyType.fromValue(keyType); }
+        @JsonProperty("KeyType")
+        public String keyType;
     }
 
     public static class AttributeDefinitionWrapper {
-        @JsonbProperty("AttributeName")
-        String attributeName;
+        @JsonProperty("AttributeName")
+        public String attributeName;
 
-        @JsonbProperty("AttributeType")
-        String attributeType;
-
-        public String getAttributeName() { return attributeName; }
-        public ScalarAttributeType getAttributeType() { return ScalarAttributeType.fromValue(attributeType); }
+        @JsonProperty("AttributeType")
+        public String attributeType;
     }
 
     public static class ModelItem {
-        @JsonbProperty("model") String model;
-        @JsonbProperty("name") String name;
-        @JsonbProperty("features") List<String> features;
-        @JsonbProperty("image") String image;
-        @JsonbProperty("description") String description;
-
-        public String getModel() { return model; }
-        public String getName() { return name; }
-        public List<String> getFeatures() { return features; }
-        public String getImage() { return image; }
-        public String getDescription() { return description; }
+        @JsonProperty("model") public String model;
+        @JsonProperty("name") public String name;
+        @JsonProperty("features") public List<String> features;
+        @JsonProperty("image") public String image;
+        @JsonProperty("description") public String description;
     }
 
     public static class InventoryItem {
-        @JsonbProperty("serial_number") String serialNumber;
-        @JsonbProperty("mac_address") String macAddress;
-        @JsonbProperty("model") String model;
-        @JsonbProperty("added_at") String addedAt;
-
-        public String getSerialNumber() { return serialNumber; }
-        public String getMacAddress() { return macAddress; }
-        public String getModel() { return model; }
-        public String getAddedAt() { return addedAt; }
+        @JsonProperty("serial_number") public String serialNumber;
+        @JsonProperty("mac_address") public String macAddress;
+        @JsonProperty("model") public String model;
+        @JsonProperty("added_at") public String addedAt;
     }
 }

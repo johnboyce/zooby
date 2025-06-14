@@ -80,3 +80,8 @@ variable "cluster_name" {
   type        = string
   description = "ECS cluster name"
 }
+
+variable "quarkus_profile" {
+  type    = string
+  default = "qa"
+}
