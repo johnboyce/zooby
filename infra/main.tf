@@ -247,6 +247,7 @@ module "apprunner_qa" {
 module "ecs_cluster" {
   source = "./modules/ecs_cluster"
   name   = var.cluster_name
+  vpc_id = module.vpc.vpc_id
 
 }
 
