@@ -12,8 +12,11 @@ variable "app_container_name" { default = "zooby-backend" }
 variable "container_port" { default = 8080 }
 
 variable "subnet_ids" { type = list(string) }
-variable "security_group_ids" { type = list(string) }
 
+variable "security_group_ids" {
+  type = list(string)
+  description = "Security group IDs to associate with the ECS task"
+}
 variable "desired_count" { default = 1 }
 
 variable "environment_variables" {

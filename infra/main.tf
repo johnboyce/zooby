@@ -245,8 +245,10 @@ module "apprunner_qa" {
 }
 
 module "ecs_cluster" {
-  source = "./modules/ecs_cluster"
-  name   = var.cluster_name
+  source                = "./modules/ecs_cluster"
+  name                  = var.cluster_name
+  vpc_id                = module.vpc.vpc_id
+  alb_security_group_id = module.alb.security_group_id
 
 }
 
@@ -268,7 +270,7 @@ module "zooby_backend" {
   container_port     = 8080
 
   subnet_ids         = module.vpc.public_subnet_ids
-  security_group_ids = [module.alb.security_group_id]
+  security_group_ids  = [module.alb.security_group_id, module.ecs_cluster.fargate_sg_id]
   aws_region         = var.aws_region
 
   desired_count      = 1
