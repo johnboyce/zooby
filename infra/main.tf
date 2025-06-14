@@ -245,9 +245,10 @@ module "apprunner_qa" {
 }
 
 module "ecs_cluster" {
-  source = "./modules/ecs_cluster"
-  name   = var.cluster_name
-  vpc_id = module.vpc.vpc_id
+  source                = "./modules/ecs_cluster"
+  name                  = var.cluster_name
+  vpc_id                = module.vpc.vpc_id
+  alb_security_group_id = module.alb.security_group_id
 
 }
 

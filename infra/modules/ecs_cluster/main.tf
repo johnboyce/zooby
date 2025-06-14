@@ -35,6 +35,6 @@ resource "aws_security_group_rule" "fargate_allow_alb" {
   to_port                  = 8080
   protocol                 = "tcp"
   security_group_id        = aws_security_group.fargate.id
-  source_security_group_id = aws_security_group.alb.id
+  source_security_group_id = var.alb_security_group_id
   description              = "Allow ALB to reach Fargate on port 8080"
 }
