@@ -20,6 +20,6 @@ quarkus_profile = "qa"
 
 environment_variables = [
   { name = "STAGE", value = "qa" },
-  { name = "QUARKUS_PROFILE", value = var.quarkus_profile },
+  { name = "QUARKUS_PROFILE", value = "qa" },
   { name = "LOG_LEVEL", value = "debug" }
 ]
