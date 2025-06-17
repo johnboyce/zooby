@@ -4,15 +4,18 @@ import com.zooby.model.InventoryItem;
 import com.zooby.service.InventoryService;
 import jakarta.inject.Inject;
 import org.eclipse.microprofile.graphql.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
-import java.util.Optional;
 
 @GraphQLApi
 public class InventoryResource {
+
+    private static final Logger logger = LoggerFactory.getLogger(InventoryResource.class);
+
     @Inject
     InventoryService inventoryService;
-
 
     @Query("inventoryItems")
     @Description("List inventory items with pagination and optional filtering")
@@ -21,13 +24,19 @@ public class InventoryResource {
         @Name("offset") @DefaultValue("0") int offset,
         @Name("limit") @DefaultValue("10") int limit
     ) {
+        logger.debug("listInventoryItems called with filter: {}, offset: {}, limit: {}", filter, offset, limit);
+
         if (offset < 0) {
+            logger.warn("Offset is negative: {}", offset);
             throw new IllegalArgumentException("Offset cannot be negative");
         }
         if (limit < 1) {
+            logger.warn("Limit is not positive: {}", limit);
             throw new IllegalArgumentException("Limit must be positive");
         }
-        return inventoryService.findAll(filter, offset, limit);
-    }
 
+        List<InventoryItem> results = inventoryService.findAll(filter, offset, limit);
+        logger.info("listInventoryItems returned {} results", results.size());
+        return results;
+    }
 }

@@ -22,42 +22,73 @@ public class DynamoDBService {
     @PostConstruct
     void seedIfEmpty() {
         String txnId = "txn-AABBCCDDEE00-1716515612";
+        LOG.debugf("Checking if activation status exists for transaction ID: %s", txnId);
 
-        if (getActivationStatus(txnId) == null) {
-            Map<String, AttributeValue> item = new HashMap<>();
-            item.put("userId", AttributeValue.fromS("user-123"));
-            item.put("transactionId", AttributeValue.fromS(txnId));
-            item.put("macAddress", AttributeValue.fromS("AA:BB:CC:DD:EE:00"));
-            item.put("status", AttributeValue.fromS("INPROGRESS"));
-            item.put("stepsLog", AttributeValue.fromSs(
+        try {
+            if (getActivationStatus(txnId) == null) {
+                LOG.infof("No activation status found for transaction ID: %s. Seeding data.", txnId);
+                Map<String, AttributeValue> item = new HashMap<>();
+                item.put("userId", AttributeValue.fromS("user-123"));
+                item.put("transactionId", AttributeValue.fromS(txnId));
+                item.put("macAddress", AttributeValue.fromS("AA:BB:CC:DD:EE:00"));
+                item.put("status", AttributeValue.fromS("INPROGRESS"));
+                item.put("stepsLog", AttributeValue.fromSs(
                     List.of("Initializing", "Contacting Zoomba", "Bootfile Ready")
-            ));
-            item.put("updatedAt", AttributeValue.fromS(Instant.now().toString()));
+                ));
+                item.put("updatedAt", AttributeValue.fromS(Instant.now().toString()));
 
-            writeActivationStatus(item);
-            LOG.info("Seeded activation status for " + txnId);
+                writeActivationStatus(item);
+                LOG.infof("Seeded activation status for transaction ID: %s", txnId);
+            } else {
+                LOG.debugf("Activation status already exists for transaction ID: %s", txnId);
+            }
+        } catch (Exception e) {
+            LOG.errorf("Error during seed operation for transaction ID: %s. Message: %s", txnId, e.getMessage());
         }
     }
 
-
     public Map<String, AttributeValue> getActivationStatus(String transactionId) {
-        QueryRequest queryRequest = QueryRequest.builder()
+        LOG.debugf("Fetching activation status for transaction ID: %s", transactionId);
+        try {
+            QueryRequest queryRequest = QueryRequest.builder()
                 .tableName(tableName)
                 .indexName("transactionId-index")
                 .keyConditionExpression("transactionId = :txn")
                 .expressionAttributeValues(Map.of(":txn", AttributeValue.fromS(transactionId)))
                 .build();
 
-        QueryResponse response = dynamoDb.query(queryRequest);
-        return response.count() > 0 ? response.items().get(0) : null;
+            QueryResponse response = dynamoDb.query(queryRequest);
+            if (response.count() > 0) {
+                LOG.infof("Activation status found for transaction ID: %s", transactionId);
+                return response.items().get(0);
+            } else {
+                LOG.warnf("No activation status found for transaction ID: %s", transactionId);
+                return null;
+            }
+        } catch (DynamoDbException e) {
+            LOG.errorf("DynamoDB error while fetching activation status for transaction ID: %s. Message: %s", transactionId, e.getMessage());
+            return null;
+        } catch (Exception e) {
+            LOG.errorf("Unexpected error while fetching activation status for transaction ID: %s. Message: %s", transactionId, e.getMessage());
+            return null;
+        }
     }
 
     public void writeActivationStatus(Map<String, AttributeValue> item) {
-        PutItemRequest request = PutItemRequest.builder()
+        String transactionId = item.get("transactionId").s();
+        LOG.debugf("Writing activation status for transaction ID: %s", transactionId);
+        try {
+            PutItemRequest request = PutItemRequest.builder()
                 .tableName(tableName)
                 .item(item)
                 .build();
 
-        dynamoDb.putItem(request);
+            dynamoDb.putItem(request);
+            LOG.infof("Activation status written successfully for transaction ID: %s", transactionId);
+        } catch (DynamoDbException e) {
+            LOG.errorf("DynamoDB error while writing activation status for transaction ID: %s. Message: %s", transactionId, e.getMessage());
+        } catch (Exception e) {
+            LOG.errorf("Unexpected error while writing activation status for transaction ID: %s. Message: %s", transactionId, e.getMessage());
+        }
     }
 }
