@@ -2,5 +2,9 @@ FROM quay.io/quarkus/ubi9-quarkus-micro-image:2.0
 WORKDIR /work/
 COPY target/*-runner /work/application
 RUN chmod 755 /work/application
+# QUARKUS_PROFILE is required for native
+ENV QUARKUS_PROFILE=qa
 EXPOSE 8080
-CMD ["./application", "-Dquarkus.profile=qa"]
+# -Dquarkus.profile=qa only works for JVM
+#CMD ["./application", "-Dquarkus.profile=qa"]
+CMD ["./application"]
