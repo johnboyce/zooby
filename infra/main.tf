@@ -286,8 +286,25 @@ module "ecs_iam" {
   task_permissions = [
     {
       Effect   = "Allow"
-      Action   = ["dynamodb:GetItem", "dynamodb:PutItem"]
+      Action = [
+        "dynamodb:GetItem",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:Query",
+        "dynamodb:Scan",
+        "dynamodb:BatchGetItem",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:DescribeTable"
+      ]
       Resource = ["arn:aws:dynamodb:us-east-1:020157571320:table/zooby-*"]
+    },
+    {
+      Effect = "Allow"
+      Action = [
+        "dynamodb:ListTables"
+      ]
+      Resource = ["*"] # Required for ListTables
     },
     {
       Effect   = "Allow"
