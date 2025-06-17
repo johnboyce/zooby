@@ -4,13 +4,14 @@ import io.quarkus.runtime.Startup;
 import jakarta.annotation.PostConstruct;
 import jakarta.inject.Singleton;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Startup
 @Singleton
 public class StartupLogger {
 
-    private static final Logger LOG = Logger.getLogger(StartupLogger.class);
+    private static final Logger LOG = LoggerFactory.getLogger(StartupLogger.class);
 
     @ConfigProperty(name = "quarkus.profile")
     String profile;

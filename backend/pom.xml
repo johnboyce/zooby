@@ -16,7 +16,6 @@
     <quarkus.amazon.dynamodb.version>3.7.0</quarkus.amazon.dynamodb.version>
     <maven.compiler.plugin.version>3.12.1</maven.compiler.plugin.version>
     <jackson.version>2.17.1</jackson.version>
-    <opentelemetry.sdk.version>1.30.0</opentelemetry.sdk.version>
     <rest.assured.version>5.4.0</rest.assured.version>
     <assertj.version>3.26.0</assertj.version>
     <mockito.version>5.11.0</mockito.version>
@@ -82,6 +81,12 @@
       <artifactId>quarkus-logging-json</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <scope>provided</scope> <!-- Optional: Avoid including it in the final artifact -->
+    </dependency>
+
     <!-- AWS DynamoDB -->
     <dependency>
       <groupId>io.quarkiverse.amazonservices</groupId>
@@ -104,16 +109,8 @@
 
     <!-- OpenTelemetry SDK -->
     <dependency>
-      <groupId>io.opentelemetry</groupId>
-      <artifactId>opentelemetry-sdk</artifactId>
-      <version>${opentelemetry.sdk.version}</version>
-    </dependency>
-
-    <!-- OpenTelemetry Logging Exporter -->
-    <dependency>
-      <groupId>io.opentelemetry</groupId>
-      <artifactId>opentelemetry-exporter-logging</artifactId>
-      <version>${opentelemetry.sdk.version}</version>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-opentelemetry</artifactId>
     </dependency>
 
     <!-- Test Dependencies -->

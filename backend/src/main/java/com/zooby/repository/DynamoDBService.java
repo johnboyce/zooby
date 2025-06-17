@@ -1,19 +1,22 @@
 package com.zooby.repository;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.inject.Inject;
 import jakarta.enterprise.context.ApplicationScoped;
-import org.jboss.logging.Logger;
+import jakarta.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.*;
 
 import java.time.Instant;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @ApplicationScoped
 public class DynamoDBService {
 
-    private static final Logger LOG = Logger.getLogger(DynamoDBService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DynamoDBService.class);
     private final String tableName = "zooby_activation";
 
     @Inject
@@ -22,11 +25,11 @@ public class DynamoDBService {
     @PostConstruct
     void seedIfEmpty() {
         String txnId = "txn-AABBCCDDEE00-1716515612";
-        LOG.debugf("Checking if activation status exists for transaction ID: %s", txnId);
+        LOG.debug("Checking if activation status exists for transaction ID: {}", txnId);
 
         try {
             if (getActivationStatus(txnId) == null) {
-                LOG.infof("No activation status found for transaction ID: %s. Seeding data.", txnId);
+                LOG.info("No activation status found for transaction ID: {}. Seeding data.", txnId);
                 Map<String, AttributeValue> item = new HashMap<>();
                 item.put("userId", AttributeValue.fromS("user-123"));
                 item.put("transactionId", AttributeValue.fromS(txnId));
@@ -38,17 +41,17 @@ public class DynamoDBService {
                 item.put("updatedAt", AttributeValue.fromS(Instant.now().toString()));
 
                 writeActivationStatus(item);
-                LOG.infof("Seeded activation status for transaction ID: %s", txnId);
+                LOG.info("Seeded activation status for transaction ID: {}", txnId);
             } else {
-                LOG.debugf("Activation status already exists for transaction ID: %s", txnId);
+                LOG.debug("Activation status already exists for transaction ID: {}", txnId);
             }
         } catch (Exception e) {
-            LOG.errorf("Error during seed operation for transaction ID: %s. Message: %s", txnId, e.getMessage());
+            LOG.error("Error during seed operation for transaction ID: {}. Message: {}", txnId, e.getMessage());
         }
     }
 
     public Map<String, AttributeValue> getActivationStatus(String transactionId) {
-        LOG.debugf("Fetching activation status for transaction ID: %s", transactionId);
+        LOG.debug("Fetching activation status for transaction ID: {}", transactionId);
         try {
             QueryRequest queryRequest = QueryRequest.builder()
                 .tableName(tableName)
@@ -59,24 +62,24 @@ public class DynamoDBService {
 
             QueryResponse response = dynamoDb.query(queryRequest);
             if (response.count() > 0) {
-                LOG.infof("Activation status found for transaction ID: %s", transactionId);
+                LOG.info("Activation status found for transaction ID: {}", transactionId);
                 return response.items().get(0);
             } else {
-                LOG.warnf("No activation status found for transaction ID: %s", transactionId);
+                LOG.warn("No activation status found for transaction ID: {}", transactionId);
                 return null;
             }
         } catch (DynamoDbException e) {
-            LOG.errorf("DynamoDB error while fetching activation status for transaction ID: %s. Message: %s", transactionId, e.getMessage());
+            LOG.error("DynamoDB error while fetching activation status for transaction ID: {}. Message: {}", transactionId, e.getMessage());
             return null;
         } catch (Exception e) {
-            LOG.errorf("Unexpected error while fetching activation status for transaction ID: %s. Message: %s", transactionId, e.getMessage());
+            LOG.error("Unexpected error while fetching activation status for transaction ID: {}. Message: {}", transactionId, e.getMessage());
             return null;
         }
     }
 
     public void writeActivationStatus(Map<String, AttributeValue> item) {
         String transactionId = item.get("transactionId").s();
-        LOG.debugf("Writing activation status for transaction ID: %s", transactionId);
+        LOG.debug("Writing activation status for transaction ID: {}", transactionId);
         try {
             PutItemRequest request = PutItemRequest.builder()
                 .tableName(tableName)
@@ -84,11 +87,11 @@ public class DynamoDBService {
                 .build();
 
             dynamoDb.putItem(request);
-            LOG.infof("Activation status written successfully for transaction ID: %s", transactionId);
+            LOG.info("Activation status written successfully for transaction ID: {}", transactionId);
         } catch (DynamoDbException e) {
-            LOG.errorf("DynamoDB error while writing activation status for transaction ID: %s. Message: %s", transactionId, e.getMessage());
+            LOG.error("DynamoDB error while writing activation status for transaction ID: {}. Message: {}", transactionId, e.getMessage());
         } catch (Exception e) {
-            LOG.errorf("Unexpected error while writing activation status for transaction ID: %s. Message: %s", transactionId, e.getMessage());
+            LOG.error("Unexpected error while writing activation status for transaction ID: {}. Message: {}", transactionId, e.getMessage());
         }
     }
 }

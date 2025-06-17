@@ -9,7 +9,8 @@ import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.*;
 
@@ -21,7 +22,7 @@ import java.util.Map;
 @ApplicationScoped
 public class DynamoDbSeeder {
 
-    private static final Logger LOG = Logger.getLogger(DynamoDbSeeder.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DynamoDbSeeder.class);
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
     @Inject

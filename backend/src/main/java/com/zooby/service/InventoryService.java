@@ -4,7 +4,8 @@ import com.zooby.model.InventoryItem;
 import com.zooby.repository.InventoryRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.jboss.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,7 +13,7 @@ import java.util.Optional;
 @ApplicationScoped
 public class InventoryService {
 
-    private static final Logger LOG = Logger.getLogger(InventoryService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(InventoryService.class);
     private final InventoryRepository inventoryRepository;
 
     @Inject
