@@ -109,11 +109,9 @@ public class ZoobyModelRepository {
 
         if (item.containsKey("features")) {
             try {
-                List<String> features = item.get("features").l().stream()
-                    .map(AttributeValue::s)
-                    .collect(Collectors.toList());
+                List<String> features = item.get("features").ss(); // ✅ Fixed: read SS properly
                 model.setFeatures(features);
-            } catch (IllegalArgumentException e) {
+            } catch (Exception e) {
                 logger.error("Error mapping features, setting to empty list", e);
                 model.setFeatures(new ArrayList<>());
             }
@@ -136,10 +134,7 @@ public class ZoobyModelRepository {
         }
 
         if (model.getFeatures() != null && !model.getFeatures().isEmpty()) {
-            List<AttributeValue> featureValues = model.getFeatures().stream()
-                .map(feature -> AttributeValue.builder().s(feature).build())
-                .collect(Collectors.toList());
-            item.put("features", AttributeValue.builder().l(featureValues).build());
+            item.put("features", AttributeValue.builder().ss(model.getFeatures()).build()); // ✅ Store as SS
         }
 
         PutItemRequest putRequest = PutItemRequest.builder()
