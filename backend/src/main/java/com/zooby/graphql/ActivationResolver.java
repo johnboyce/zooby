@@ -1,17 +1,20 @@
 package com.zooby.graphql;
 
-import com.zooby.repository.DynamoDBService;
 import com.zooby.model.ActivationResponse;
 import com.zooby.model.ActivationStatus;
 import com.zooby.model.Eligibility;
+import com.zooby.repository.DynamoDBService;
 import com.zooby.security.UserContext;
 import io.quarkus.security.ForbiddenException;
 import jakarta.annotation.security.RolesAllowed;
-import org.jboss.logging.Logger;
-import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
-
 import jakarta.inject.Inject;
-import org.eclipse.microprofile.graphql.*;
+import org.eclipse.microprofile.graphql.GraphQLApi;
+import org.eclipse.microprofile.graphql.Mutation;
+import org.eclipse.microprofile.graphql.Name;
+import org.eclipse.microprofile.graphql.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 
 import java.time.Instant;
 import java.util.List;
@@ -20,7 +23,7 @@ import java.util.Map;
 @GraphQLApi
 public class ActivationResolver {
 
-    private static final Logger LOG = Logger.getLogger(ActivationResolver.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ActivationResolver.class);
 
     @Inject
     DynamoDBService dynamoService;
@@ -31,15 +34,15 @@ public class ActivationResolver {
     @Query
     @RolesAllowed("customer")
     public ActivationStatus activationStatus(@Name("transactionId") String transactionId) {
-        LOG.infof("ActivationStatus: userId=%s, account=%s, roles=%s",
+        LOG.info("ActivationStatus: userId={}, account={}, roles={}",
             user.getUserId(), user.getAccount(), user.getRoles());
 
         try {
-            LOG.debugf("Fetching activation status for transactionId=%s", transactionId);
+            LOG.debug("Fetching activation status for transactionId={}", transactionId);
             Map<String, AttributeValue> item = dynamoService.getActivationStatus(transactionId);
 
             if (item == null) {
-                LOG.warnf("No activation status found for transactionId=%s", transactionId);
+                LOG.warn("No activation status found for transactionId={}", transactionId);
                 return null;
             }
 
@@ -52,11 +55,11 @@ public class ActivationResolver {
                 item.get("updatedAt").s()
             );
 
-            LOG.debugf("Resolved activation status: %s", status);
+            LOG.debug("Resolved activation status: {}", status);
             return status;
 
         } catch (Exception e) {
-            LOG.errorf("Error fetching activation status for transactionId=%s: %s", transactionId, e.getMessage());
+            LOG.error("Error fetching activation status for transactionId={}: {}", transactionId, e.getMessage());
             throw new RuntimeException("Failed to fetch activation status", e);
         }
     }
@@ -64,12 +67,12 @@ public class ActivationResolver {
     @Query
     @RolesAllowed({"manager", "admin"})
     public Eligibility eligibility(@Name("macAddress") String macAddress) {
-        LOG.infof("Eligibility check for macAddress=%s by userId=%s", macAddress, user.getUserId());
+        LOG.info("Eligibility check for macAddress={} by userId={}", macAddress, user.getUserId());
         if (!user.hasCapability("restart")) {
-            LOG.warnf("Unauthorized activation attempt by user %s", user.getUserId());
+            LOG.warn("Unauthorized activation attempt by user {}", user.getUserId());
             throw new ForbiddenException("You do not have permission to activate a Zooby.");
         }
-        LOG.debugf("Eligibility check passed for macAddress=%s", macAddress);
+        LOG.debug("Eligibility check passed for macAddress={}", macAddress);
         return new Eligibility(macAddress, true, "ZoobyCorp", "ModelZ-9000");
     }
 
@@ -80,10 +83,10 @@ public class ActivationResolver {
                                        @Name("model") String model) {
         String transactionId = "txn-" + macAddress.replace(":", "") + "-" + Instant.now().getEpochSecond();
 
-        LOG.infof("Activating device with macAddress=%s, make=%s, model=%s by userId=%s",
+        LOG.info("Activating device with macAddress={}, make={}, model={} by userId={}",
             macAddress, make, model, user.getUserId());
         try {
-            LOG.debugf("Writing activation status for transactionId=%s", transactionId);
+            LOG.debug("Writing activation status for transactionId={}", transactionId);
             dynamoService.writeActivationStatus(Map.of(
                 "macAddress", AttributeValue.fromS(macAddress),
                 "transactionId", AttributeValue.fromS(transactionId),
@@ -94,10 +97,10 @@ public class ActivationResolver {
                 "model", AttributeValue.fromS(model),
                 "stepsLog", AttributeValue.fromSs(List.of("Activation started"))
             ));
-            LOG.infof("Activation successful for transactionId=%s", transactionId);
+            LOG.info("Activation successful for transactionId={}", transactionId);
             return new ActivationResponse(transactionId, true);
         } catch (Exception e) {
-            LOG.errorf("Error activating device with macAddress=%s: %s", macAddress, e.getMessage());
+            LOG.error("Error activating device with macAddress={}: {}", macAddress, e.getMessage());
             throw new RuntimeException("Failed to activate device", e);
         }
     }

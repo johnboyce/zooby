@@ -15,6 +15,7 @@
     <amazon.awssdk.version>2.31.44</amazon.awssdk.version>
     <quarkus.amazon.dynamodb.version>3.7.0</quarkus.amazon.dynamodb.version>
     <maven.compiler.plugin.version>3.12.1</maven.compiler.plugin.version>
+    <jackson.version>2.17.1</jackson.version>
     <rest.assured.version>5.4.0</rest.assured.version>
     <assertj.version>3.26.0</assertj.version>
     <mockito.version>5.11.0</mockito.version>
@@ -75,6 +76,16 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-scheduler</artifactId>
     </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-logging-json</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <scope>provided</scope> <!-- Optional: Avoid including it in the final artifact -->
+    </dependency>
 
     <!-- AWS DynamoDB -->
     <dependency>
@@ -87,6 +98,19 @@
       <groupId>software.amazon.awssdk</groupId>
       <artifactId>url-connection-client</artifactId>
       <version>${amazon.awssdk.version}</version>
+    </dependency>
+
+    <!-- Jackson for JSON processing -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+
+    <!-- OpenTelemetry SDK -->
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-opentelemetry</artifactId>
     </dependency>
 
     <!-- Test Dependencies -->

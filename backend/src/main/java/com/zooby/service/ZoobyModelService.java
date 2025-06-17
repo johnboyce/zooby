@@ -2,24 +2,18 @@ package com.zooby.service;
 
 import com.zooby.model.ZoobyModel;
 import com.zooby.repository.ZoobyModelRepository;
-import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-import org.jboss.logging.Logger;
-import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
-import software.amazon.awssdk.services.dynamodb.model.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class ZoobyModelService {
 
-    private static final Logger LOG = Logger.getLogger(ZoobyModelService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ZoobyModelService.class);
     private final ZoobyModelRepository repository;
 
     @Inject

@@ -96,7 +96,7 @@ class ModelResourceTest {
                 LOG.info("Current table status: {}", currentStatus);
                 if (currentStatus != expectedStatus) {
                     throw new AssertionError(
-                        String.format("Table status is %s, expecting %s", currentStatus, expectedStatus));
+                        String.format("Table status is {}, expecting {}", currentStatus, expectedStatus));
                 }
             });
     }
@@ -139,7 +139,7 @@ class ModelResourceTest {
         LOG.info("Testing model lookup for: {}", TEST_MODEL);
         String query = """
             {
-                zoobyModel(model: "%s") {
+                zoobyModel(model: "{}") {
                     name
                     description
                     features
