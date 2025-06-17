@@ -1,5 +1,6 @@
 package com.zooby.security;
 
+import io.opentelemetry.api.trace.Span;
 import io.quarkus.security.identity.SecurityIdentity;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
@@ -24,7 +25,8 @@ public class UserContext {
         this.userId = identity.getPrincipal().getName();
         this.account = identity.getAttribute("account");
         this.roles = identity.getRoles();
-
+        MDC.put("traceId", Span.current().getSpanContext().getTraceId());
+        MDC.put("spanId", Span.current().getSpanContext().getSpanId());
         MDC.put("userId", userId);
         MDC.put("account", account);
         MDC.put("roles", roles.toString());
