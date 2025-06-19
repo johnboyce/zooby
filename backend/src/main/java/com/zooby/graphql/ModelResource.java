@@ -2,6 +2,7 @@ package com.zooby.graphql;
 
 import com.zooby.model.ZoobyModel;
 import com.zooby.service.ZoobyModelService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import org.eclipse.microprofile.graphql.*;
 
@@ -18,6 +19,7 @@ public class ModelResource {
     @Inject
     ZoobyModelService modelService;
 
+    @RolesAllowed("user")
     @Query("zoobyModel")
     @Description("Lookup a Zooby model by model number")
     public Optional<ZoobyModel> getModel(
@@ -34,6 +36,7 @@ public class ModelResource {
         return result;
     }
 
+    @RolesAllowed("user")
     @Query("zoobyModels")
     @Description("List all Zooby models with pagination and optional filtering")
     public @NonNull List<ZoobyModel> listModels(

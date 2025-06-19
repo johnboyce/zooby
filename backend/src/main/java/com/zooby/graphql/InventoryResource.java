@@ -2,6 +2,7 @@ package com.zooby.graphql;
 
 import com.zooby.model.InventoryItem;
 import com.zooby.service.InventoryService;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import org.eclipse.microprofile.graphql.*;
 import org.slf4j.Logger;
@@ -17,6 +18,7 @@ public class InventoryResource {
     @Inject
     InventoryService inventoryService;
 
+    @RolesAllowed("user")
     @Query("inventoryItems")
     @Description("List inventory items with pagination and optional filtering")
     public List<InventoryItem> listInventoryItems(
