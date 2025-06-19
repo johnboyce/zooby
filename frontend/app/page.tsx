@@ -2,10 +2,14 @@
 import Image from 'next/image'
 import ActivationStatus from "./components/ActivationStatus";
 import DeploymentInfo from './components/DeploymentInfo';
+import ModelsPopup from './components/ModelsPopup';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import { useState } from 'react';
 
 export default function Home() {
   const { data: session, status } = useSession();
+  const [showModelsPopup, setShowModelsPopup] = useState(false);
+
   return (
     <main className="min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-cyan-950/20 to-slate-950 text-white p-4 sm:p-6 md:p-8 relative overflow-hidden">
       <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
@@ -24,9 +28,12 @@ export default function Home() {
                   Dashboard
                 </span>
               </a>
-              <a href="#" className="text-gray-400 hover:text-cyan-300 font-semibold px-4 py-2 rounded-lg transition-all duration-200 border border-transparent hover:bg-cyan-500/10 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+              <button
+                onClick={() => setShowModelsPopup(true)}
+                className="text-left text-gray-400 hover:text-cyan-300 font-semibold px-4 py-2 rounded-lg transition-all duration-200 border border-transparent hover:bg-cyan-500/10 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+              >
                 Devices
-              </a>
+              </button>
               <a href="#" className="text-gray-400 hover:text-cyan-300 font-semibold px-4 py-2 rounded-lg transition-all duration-200 border border-transparent hover:bg-cyan-500/10 focus:outline-none focus:ring-2 focus:ring-cyan-400">
                 Settings
               </a>
@@ -134,6 +141,12 @@ export default function Home() {
           <DeploymentInfo />
         </div>
       </footer>
+
+      {/* Add the ModelsPopup component */}
+      <ModelsPopup
+        show={showModelsPopup}
+        onHide={() => setShowModelsPopup(false)}
+      />
     </main>
   );
 }
