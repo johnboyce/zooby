@@ -27,6 +27,10 @@ public class ZoobyModel {
     @JsonbProperty("image")
     private String image;
 
+    @Description("The price of the device")
+    @JsonbProperty("price")
+    private Double price;
+
     public ZoobyModel() {
     }
 
@@ -68,5 +72,13 @@ public class ZoobyModel {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }
