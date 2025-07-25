@@ -32,6 +32,7 @@ public class UserContext {
 
     @PostConstruct
     void init() {
+        LOG.info("🔄 Initializing user context");
         this.userId = identity.getPrincipal().getName();
         String provider = identity.getAttribute("provider");
         String providerId = identity.getAttribute("provider_id");
