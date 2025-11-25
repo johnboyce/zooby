@@ -2,6 +2,8 @@
 
 This module creates IAM resources for GitHub Actions to authenticate with AWS using OpenID Connect (OIDC), eliminating the need for long-lived AWS credentials.
 
+> ⚠️ **Security Warning:** This module currently attaches `AdministratorAccess` policy to the IAM role. This is suitable for development but should be replaced with least-privilege permissions for production environments. See the [Security Considerations](#security-considerations) section for recommended configurations.
+
 ## Features
 
 - Creates IAM OIDC identity provider for GitHub Actions

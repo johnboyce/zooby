@@ -145,7 +145,6 @@ const ModelsPopup: React.FC<ModelsPopupProps> = ({ show, onHide }) => {
                       alt={model.name}
                       fill
                       className="object-cover"
-                      unoptimized
                     />
                   </div>
                 )}
