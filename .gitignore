@@ -40,6 +40,11 @@ frontend/.eslintcache
 .env.*
 *.local
 
+# Local agent tooling (machine-specific, never published)
+.mcp.json
+CLAUDE.local.md
+.claude/settings.local.json
+
 # --- Terraform ---
 *.tfstate
 *.tfstate.backup
