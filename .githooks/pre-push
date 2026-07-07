@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+#
+# pre-push TEST GATE — language-agnostic homelab template
+# (seeded into new app repos by the homelab `new_app_onboard` tool; see
+# homelab-admin docs/HOMELAB_CONVENTIONS.md → "Test-enforcement conventions")
+#
+# What it does: when the commits being pushed touch source files, run the
+# repo's test suite. A failing suite blocks the push, so broken code never
+# reaches a PR. Pushes to a public GitHub mirror are exempt (a mirror only
+# receives already-merged, already-CI-gated commits).
+#
+# Wire it for THIS repo (two lines):
+#   TEST_CMD     — the command that runs your suite, including any coverage
+#                  floor wired into it (e.g. "./gradlew --console=plain test",
+#                  "npm test", "mvn -q verify", "pytest -q").
+#   SRC_PATTERN  — extended regex of paths that should trigger the gate.
+#
+# Until TEST_CMD is set the hook warns and allows the push (no-op), so seeding
+# it into a repo is always safe.
+#
+# Composes with an anti-leak guard: if this repo mirrors to a public remote,
+# append a leak-guard section for the github.com case — see the two-guard
+# reference implementation in intellij-openspec/.githooks/pre-push.
+#
+# Activation (once per clone): git config core.hooksPath .githooks
+# Emergency bypass:            git push --no-verify
+
+set -uo pipefail
+
+TEST_CMD=""
+SRC_PATTERN='^(backend|frontend)/'
+MAIN_REF="origin/main"
+
+remote_url="${2:-}"
+repo_root="$(git rev-parse --show-toplevel 2>/dev/null || echo .)"
+zero='0000000000000000000000000000000000000000'
+
+# Public mirror: exempt from the test gate (add a leak guard here instead).
+case "$remote_url" in
+  *github.com*) exit 0 ;;
+esac
+
+changed=""
+while read -r local_ref local_sha remote_ref remote_sha; do
+  [ -z "${local_sha:-}" ] && continue
+  [ "$local_sha" = "$zero" ] && continue   # branch deletion — nothing to test
+  if [ -z "${remote_sha:-}" ] || [ "$remote_sha" = "$zero" ]; then
+    # New branch on the remote: diff against the merge-base with main.
+    base="$(git merge-base "$local_sha" "$MAIN_REF" 2>/dev/null || true)"
+    range="${base:+$base..}$local_sha"
+  else
+    range="$remote_sha..$local_sha"
+  fi
+  files="$(git diff --name-only $range 2>/dev/null || true)"
+  changed="$changed
+$files"
+done
+
+if ! printf '%s\n' "$changed" | grep -qE "$SRC_PATTERN"; then
+  exit 0   # no source changes — nothing to gate
+fi
+
+if [ -z "$TEST_CMD" ]; then
+  echo "⚠ pre-push: source changes detected but TEST_CMD is not set in .githooks/pre-push —" >&2
+  echo "  the test gate is a no-op until this repo wires its test command. Allowing the push." >&2
+  exit 0
+fi
+
+echo "▶ pre-push: source changes detected — running: $TEST_CMD" >&2
+if ! ( cd "$repo_root" && eval "$TEST_CMD" </dev/null >&2 ); then
+  echo "" >&2
+  echo "✖ pre-push BLOCKED: the test suite (or its coverage floor) failed." >&2
+  echo "  Fix before pushing — PRs must be green." >&2
+  echo "  Emergency bypass: git push --no-verify" >&2
+  exit 1
+fi
+echo "✓ pre-push: tests passed." >&2
+exit 0
