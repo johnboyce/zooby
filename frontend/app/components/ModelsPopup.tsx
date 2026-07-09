@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
 
 interface ZoobyModel {
   model: string;
@@ -139,10 +140,11 @@ const ModelsPopup: React.FC<ModelsPopupProps> = ({ show, onHide }) => {
               <div key={model.model} className="bg-black/40 rounded-xl border border-cyan-500/20 overflow-hidden flex flex-col h-full">
                 {model.image && (
                   <div className="h-48 relative overflow-hidden">
-                    <img
+                    <Image
                       src={model.image}
                       alt={model.name}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                 )}
